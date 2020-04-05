@@ -8,6 +8,8 @@ import { HomeComponent } from './components/home/home.component';
 import { PedidosComponent } from './components/pedidos/pedidos.component';
 import { AjustesComponent } from './components/ajustes/ajustes.component';
 import { BuscarComponent } from './components/buscar/buscar.component';
+import { ItemsComponent } from './components/items/items.component';
+import { ItemDetailComponent } from './components/item-detail/item-detail.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { BuscarComponent } from './components/buscar/buscar.component';
     HomeComponent,
     PedidosComponent,
     AjustesComponent,
-    BuscarComponent
+    BuscarComponent,
+    ItemsComponent,
+    ItemDetailComponent
   ],
   imports: [
     BrowserModule,

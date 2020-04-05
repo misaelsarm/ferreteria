@@ -4,6 +4,8 @@ import { HomeComponent } from './components/home/home.component';
 import { BuscarComponent } from './components/buscar/buscar.component';
 import { AjustesComponent } from './components/ajustes/ajustes.component';
 import { PedidosComponent } from './components/pedidos/pedidos.component';
+import { ItemsComponent } from './components/items/items.component';
+import { ItemDetailComponent } from './components/item-detail/item-detail.component';
 
 
 const routes: Routes = [
@@ -11,6 +13,7 @@ const routes: Routes = [
   { path: 'buscar', component: BuscarComponent },
   { path: 'pedidos', component: PedidosComponent },
   { path: 'ajustes', component: AjustesComponent },
+  { path: 'producto/:id', component: ItemDetailComponent },
   { path: '**', pathMatch: 'full', redirectTo: 'inicio' }
 ];
 

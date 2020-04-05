@@ -1,0 +1,15 @@
+<div class="row">
+    <div class="col-md-3" *ngFor="let item of ferreteriaService.items; let i = index">
+        <div class="card w-100 mb-3">
+            <img src="assets/img/items.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{item.nombre}}</h5>
+                <h4 style="font-weight: bold;">{{item.precio | currency}}</h4>
+                <div class="d-flex flex-wrap">
+                    <a href="#" class="m-1 btn btn-primary">Agregar</a>
+                    <a [routerLink]="['/producto', item.id]" class="m-1 btn btn-primary">Ver detalles</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
