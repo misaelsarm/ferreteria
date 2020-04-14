@@ -1,6 +1,11 @@
 <div class="contenedor">
-    <app-navbar></app-navbar>
-    <div class="component">
-        <router-outlet></router-outlet>
-    </div>
+    <app-navbar *ngIf="loggedIn"></app-navbar>
+    <!-- <div class="component">
+        
+    </div> -->
+    <router-outlet></router-outlet>
+</div>
+
+<div *ngIf="loggedIn" class="user-nav">
+    <app-user-nav-bar></app-user-nav-bar>
 </div>

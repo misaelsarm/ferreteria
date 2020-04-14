@@ -1,15 +1,3 @@
-<!-- <div class="row">
-    <div class="col-md-12">
-        <div class="card w-75 mb-3 d-flex">
-            <img src="assets/img/items.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">{{item.nombre}}</h5>
-                <h4 style="font-weight: bold;">{{item.precio | currency}}</h4>
-            </div>
-        </div>
-    </div>
-</div> -->
-
 <div class="card mb-3 w-100 h-100">
     <div class="row no-gutters">
         <div class="col-md-4">
@@ -18,12 +6,17 @@
         <div class="col-md-8">
             <div class="card-body">
                 <h5 class="card-title">{{item.nombre}}</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <h5>{{item.marca}}</h5>
+                <p>Código: {{item.id}}</p>
+                <p class="card-text">{{item.descripcion}}</p>
                 <h5>{{item.precio | currency}}</h5>
+                <div class="d-flex justify-content-between">
+                    <p *ngIf="item.enExistencia">En existencia: si</p>
+                    <p>Disponibles: {{item.enExistenciaDisponibles}}</p>
+                </div>
                 <div class="d-flex flex-wrap">
                     <a href="#" class="m-1 btn btn-primary">Agregar</a>
                 </div>
-
             </div>
         </div>
     </div>

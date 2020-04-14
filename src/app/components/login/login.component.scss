@@ -1,0 +1,73 @@
+.login-container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    .left {
+        background: url('../../../assets/img/tools.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 100%;
+    }
+    .right {
+        background: white;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .login {
+            width: 55%;
+            height: 70%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            .title {
+                width: 80%;
+                text-align: center;
+                font-weight: bold;
+                font-size: 30px;
+            }
+            .inputs {
+                width: 80%;
+                input::-webkit-input-placeholder {
+                    font-size: 12px;
+                }
+                input {
+                    width: 100%;
+                    background: #EFEFEF;
+                    border: none;
+                    border-radius: 5px;
+                    outline: none;
+                    height: 35px;
+                    padding-left: 15px;
+                    transition: all 0.3s ease;
+                    &:hover {
+                        background: rgba(128, 128, 128, 0.233);
+                    }
+                }
+            }
+            .actions {
+                width: 80%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                button {
+                    background: #3341ff;
+                    color: white;
+                    width: 70%;
+                    border: none;
+                    outline: none;
+                    height: 35px;
+                    border-radius: 20px;
+                }
+                a {
+                    font-size: 14px;
+                    color: #3341ff;
+                }
+            }
+        }
+    }
+}

@@ -6,6 +6,7 @@ import { AjustesComponent } from './components/ajustes/ajustes.component';
 import { PedidosComponent } from './components/pedidos/pedidos.component';
 import { ItemsComponent } from './components/items/items.component';
 import { ItemDetailComponent } from './components/item-detail/item-detail.component';
+import { LoginComponent } from './components/login/login.component';
 
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'pedidos', component: PedidosComponent },
   { path: 'ajustes', component: AjustesComponent },
   { path: 'producto/:id', component: ItemDetailComponent },
+  { path: 'login', component: LoginComponent },
   { path: '**', pathMatch: 'full', redirectTo: 'inicio' }
 ];
 

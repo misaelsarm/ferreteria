@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FerreteriaService } from 'src/app/services/ferreteria.service';
 
 @Component({

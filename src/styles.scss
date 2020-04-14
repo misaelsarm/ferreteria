@@ -8,7 +8,7 @@
 body {
     margin: 0;
     padding: 0;
-    background: #ececec;
+    background: #f5f5f5;
     overflow-x: hidden;
 }
 
@@ -41,10 +41,21 @@ nav {
     margin: 40px;
     position: absolute;
     left: 200px;
+    top: 30px;
+    width: calc(100% - 280px);
 }
 
 .active-component {
     background: rgba(51, 65, 255, 0.3);
     color: #3341FF !important;
     border-left: 5px solid #3341FF;
+}
+
+.user-nav {
+    position: fixed;
+    left: 200px;
+    width: calc(100% - 200px);
+    height: auto;
+    color: rgba(0, 0, 0, 0.514);
+    background: #f5f5f5;
 }
