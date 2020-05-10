@@ -71,3 +71,24 @@
         }
     }
 }
+
+@media screen and (max-width: 576px) {
+    .login-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: url('../../../assets/img/tools.jpg');
+        .left {
+            display: none;
+        }
+        .right {
+            border-radius: 10px;
+            width: 90%;
+            height: 70%;
+            .login {
+                width: 90%;
+            }
+        }
+    }
+}

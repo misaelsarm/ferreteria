@@ -1,17 +1,19 @@
 enum Roles {
-    admin,
-    readOnly
+    Admin = 'Admin',
+    ReadOnly = 'ReadOnly'
 }
 
 export class UsuarioModel {
     nombre: string;
+    apellido: string;
+    nombreCompleto: string;
     password: string;
     email: string;
-    tipoUsuario: Roles.readOnly;
+    tipoUsuario: Roles.ReadOnly;
+    confirmPassword: string
 }
-/* 
-const order = {
 
+/* const order = {
     user: {
         user_id: 1,
         user_name: 'test'
@@ -24,7 +26,6 @@ const order = {
     },
     order_id: 22434,
     order_status: 'Pending', // o liquidado
-    order_date: '05-11-2020',
-
-}; */
-
+    order_date: '05-11-2020'
+};
+ */
