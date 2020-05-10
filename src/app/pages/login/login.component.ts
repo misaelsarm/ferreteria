@@ -17,7 +17,9 @@ export class LoginComponent implements OnInit {
   }
 
   login(form: NgForm) {
-    alert('Bienvenido ' +this.usuario.email)
+    if (form.invalid) {
+      return;
+    }
   }
 
 }

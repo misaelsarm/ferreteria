@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.scss']
 })
-export class RegistroComponent{
+export class RegistroComponent {
 
   usuario: UsuarioModel = new UsuarioModel();
   passwords = false;
