@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "ferreteria-32f85": {
+      "hosting": {
+        "ferreteria": [
+          "ferreteria-32f85"
+        ]
+      }
+    }
+  }
+}

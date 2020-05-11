@@ -1,4 +1,4 @@
-enum Roles {
+export enum Roles {
     Admin = 'Admin',
     ReadOnly = 'ReadOnly'
 }
@@ -10,7 +10,7 @@ export class UsuarioModel {
     password: string;
     email: string;
     tipoUsuario: Roles.ReadOnly;
-    confirmPassword: string
+    confirmPassword: string;
 }
 
 /* const order = {

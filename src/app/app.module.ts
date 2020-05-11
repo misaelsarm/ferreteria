@@ -15,6 +15,9 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegistroComponent } from './pages/registro/registro.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from "../environments/environment";
+//import { AngularFirestoreModule } from '@angular/fire/firestore/public_api';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,9 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    //AngularFirestoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]

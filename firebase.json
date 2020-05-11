@@ -1,0 +1,19 @@
+{
+  "hosting": [
+    {
+      "target": "ferreteria",
+      "public": "dist/ferreteria",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ]
+}

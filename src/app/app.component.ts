@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,10 @@ import { Component } from '@angular/core';
 
 
 export class AppComponent {
-  loggedIn = false;
+  loggedIn: false;
   title = 'ferreteria';
+
+  constructor(private auth: AuthService) {
+  //  this.loggedIn = this.auth.validarLogin();
+  }
 }
