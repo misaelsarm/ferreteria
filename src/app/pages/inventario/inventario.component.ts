@@ -21,35 +21,35 @@ export class InventarioComponent implements OnInit {
   }
 
   async OnclickSubmit() {
-    var id = new Date;
-    
+    const id = new Date();
+
     const { value: formValues } = await Swal.fire({
       title: 'Registro de producto',
       html:
         '<label>Nombre del producto:</label>' +
         '<input autocomplete="off" id="nombre" class="swal2-input">' +
         '<label>Precio:</label><br>' +
-        '<input autocomplete="off" type="number" id="precio" class="swal2-input"><br>'+
+        '<input autocomplete="off" type="number" id="precio" class="swal2-input"><br>' +
         '<label>Descripción:</label>' +
-        '<input autocomplete="off" id="descripcion" class="swal2-input">'+
+        '<input autocomplete="off" id="descripcion" class="swal2-input">' +
         '<label>Marca:</label>' +
-        '<input id="marca" class="swal2-input">'+
+        '<input id="marca" class="swal2-input">' +
         '<label>En existencia:</label><br>' +
         '<input autocomplete="off" type="number" id="enExistencia" class="swal2-input">',
       focusConfirm: false,
       preConfirm: () => {
-        return []
+        return [];
       }
-    })
-    
+    });
+
     if (formValues) {
       this.afs.collection('Products').doc(id.getTime().toString()).set({
-        nombre: (<HTMLInputElement>document.getElementById('nombre')).value,
-        precio:(<HTMLInputElement>document.getElementById('precio')).value,
+        nombre: ( document.getElementById('nombre') as HTMLInputElement).value,
+        precio: ( document.getElementById('precio') as HTMLInputElement).value,
         // imagenURL: this.item.imagenURL,
-        descripcion: (<HTMLInputElement> document.getElementById('descripcion')).value,
-        marca: (<HTMLInputElement>document.getElementById('marca')).value,
-        enExistencia: (<HTMLInputElement>document.getElementById('enExistencia')).value
+        descripcion: (document.getElementById('descripcion') as HTMLInputElement).value,
+        marca: ( document.getElementById('marca') as HTMLInputElement).value,
+        enExistencia: ( document.getElementById('enExistencia') as HTMLInputElement).value
       });
     }
   }
