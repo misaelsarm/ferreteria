@@ -15,14 +15,24 @@ export class FerreteriaService {
     // this.agregarItem();
   }
 
-  agregarItem(this.item) {
-    const productCollection = this.afs.collection('Products');
-    productCollection.add({
-      Name: this.item.nombre,
-      Description: this.item.descripcion,
-    });
+  agregarItem(item: Item) {
+    /* this.afs.collection('Products').doc('test').set({
+      nombre: this.item.nombre,
+      descripcion: this.item.descripcion
+    }); */
+    console.log(this.item.nombre)
 
-    console.log(this.items);
+
+    // const item2 = new item(57392937589, 'martillo', 139, 'assets/img/martillo.png', 'forjada de acero al cromo vanadio dos veces más resistente al desgaste.', 'truper', true, 25);
+    // const item3 = new item(57392937578, 'martillo', 139, 'assets/img/martillo.png', 'forjada de acero al cromo vanadio dos veces más resistente al desgaste.', 'truper', true, 25);
+    // const item4 = new item(57392993758, 'martillo', 139, 'assets/img/martillo.png', 'forjada de acero al cromo vanadio dos veces más resistente al desgaste.', 'truper', true, 25);
+    // const item5 = new item(57392937568, 'martillo', 139, 'assets/img/martillo.png', 'forjada de acero al cromo vanadio dos veces más resistente al desgaste.', 'truper', true, 25);
+    // const item6 = new item(57392937589, 'martillo', 139, 'assets/img/martillo.png', 'forjada de acero al cromo vanadio dos veces más resistente al desgaste.', 'truper', true, 25);
+    // const item7 = new item(57392937578, 'martillo', 139, 'assets/img/martillo.png', 'forjada de acero al cromo vanadio dos veces más resistente al desgaste.', 'truper', true, 25);
+    // const item8 = new item(57392993758, 'martillo', 139, 'assets/img/martillo.png', 'forjada de acero al cromo vanadio dos veces más resistente al desgaste.', 'truper', true, 25);
+    /* const item2 = new Item(2, 'Desarmador', 29, 'assets/img/desarmador.PNG');
+    const item3 = new Item(3, 'Brocha', 40, 'assets/img/brocha.PNG');
+    const item4 = new Item(4, 'Pinzas', 99, 'assets/img/pinzas.PNG'); */
   }
 
   obtenerProducto(id: number) {
@@ -30,9 +40,5 @@ export class FerreteriaService {
       return item.id === id;
     })
   }
-
-
-
-
 }
 

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {NgModule} from "@angular/core";
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
 import { Item } from 'src/app/models/item.model';
+import { FerreteriaService } from 'src/app/services/ferreteria.service';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 
 @Component({
@@ -11,19 +10,22 @@ import { Item } from 'src/app/models/item.model';
   styleUrls: ['./inventario.component.scss']
 })
 
-
 export class InventarioComponent implements OnInit {
 
   item = new Item();
-  
-  constructor() { }
+
+  constructor(private afs: AngularFirestore) { }
 
   ngOnInit(): void {
   }
 
-OnclickSubmit(formData){
-  alert("Item Name: " + formData.Name);
-}
+  OnclickSubmit() {
+    this.afs.collection('Products').doc('djsdsjsajskasj').set({
+      nombre: this.item.nombre,
+      descripcion: this.item.descripcion
+    });
+  }
+
 
 }
 
