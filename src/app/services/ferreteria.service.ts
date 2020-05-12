@@ -10,15 +10,30 @@ export class FerreteriaService {
 
   items: Item[] = [];
 
+  item = new Item();
+
+
+
   constructor(private afs: AngularFirestore) {
+
     const productCollection = afs.collection('Products');
-    productCollection.add({Name: 'Martillo', Description:'Forjada de acero al cromo vanadio dos veces más resistente al desgaste'});
+    productCollection.add(
+      {
+        Name: this.item.nombre,
+        Description: this.item.descripcion,
+      }
+    );
+
+
     this.agregarItem();
+
+
+
   }
 
   agregarItem() {
-    var i=0
-    for(i=0;i<12;i++){
+    var i = 0
+    for (i = 0; i < 12; i++) {
       var item = new Item(57392937568, 'Martillo', 139, 'assets/img/martillo.PNG', 'Forjada de acero al cromo vanadio dos veces más resistente al desgaste.', 'Truper', true, 25);
       this.items.push(item);
     }
@@ -32,7 +47,7 @@ export class FerreteriaService {
     /* const item2 = new Item(2, 'Desarmador', 29, 'assets/img/desarmador.PNG');
     const item3 = new Item(3, 'Brocha', 40, 'assets/img/brocha.PNG');
     const item4 = new Item(4, 'Pinzas', 99, 'assets/img/pinzas.PNG'); */
-   
+
     console.log(this.items);
   }
 
