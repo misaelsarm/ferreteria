@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Item } from 'src/app/models/item.model';
 import { FerreteriaService } from 'src/app/services/ferreteria.service';
 import { AngularFirestore } from '@angular/fire/firestore';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -19,12 +20,38 @@ export class InventarioComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  OnclickSubmit() {
+  async OnclickSubmit() {
     var id = new Date;
-    this.afs.collection('Products').doc(id.getTime().toString()).set({
-      nombre: this.item.nombre,
-      descripcion: this.item.descripcion
-    });
+    
+    const { value: formValues } = await Swal.fire({
+      title: 'Registro de producto',
+      html:
+        '<label>Nombre del producto:</label>' +
+        '<input id="nombre" class="swal2-input">' +
+        '<label>Precio:</label><br>' +
+        '<input type="number" id="precio" class="swal2-input"><br>'+
+        '<label>Descripción:</label>' +
+        '<input id="descripcion" class="swal2-input">'+
+        '<label>Marca:</label>' +
+        '<input id="marca" class="swal2-input">'+
+        '<label>En existencia:</label><br>' +
+        '<input type="number" id="enExistencia" class="swal2-input">',
+      focusConfirm: false,
+      preConfirm: () => {
+        return []
+      }
+    })
+    
+    if (formValues) {
+      this.afs.collection('Products').doc(id.getTime().toString()).set({
+        nombre: document.getElementById('nombre').value,
+        precio:document.getElementById('precio').value,
+        // imagenURL: this.item.imagenURL,
+        descripcion:  document.getElementById('descripcion').value,
+        marca: document.getElementById('marca').value,
+        enExistencia: document.getElementById('enExistencia').value
+      });
+    }
   }
 
 
