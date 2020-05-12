@@ -20,7 +20,8 @@ export class InventarioComponent implements OnInit {
   }
 
   OnclickSubmit() {
-    this.afs.collection('Products').doc('djsdsjsajskasj').set({
+    var id = new Date;
+    this.afs.collection('Products').doc(id.getTime().toString()).set({
       nombre: this.item.nombre,
       descripcion: this.item.descripcion
     });
