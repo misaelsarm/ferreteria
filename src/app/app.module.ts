@@ -17,6 +17,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from "../environments/environment";
+import { InventarioComponent } from './pages/inventario/inventario.component';
 //import { AngularFirestoreModule } from '@angular/fire/firestore/public_api';
 
 @NgModule({
@@ -31,7 +32,8 @@ import { environment } from "../environments/environment";
     ItemDetailComponent,
     UserNavBarComponent,
     LoginComponent,
-    RegistroComponent
+    RegistroComponent,
+    InventarioComponent
   ],
   imports: [
     BrowserModule,

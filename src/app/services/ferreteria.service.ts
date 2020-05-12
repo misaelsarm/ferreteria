@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Item } from '../models/item.model';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +10,9 @@ export class FerreteriaService {
 
   items: Item[] = [];
 
-  constructor() {
+  constructor(private afs: AngularFirestore) {
+    const productCollection = afs.collection('Products');
+    productCollection.add({Name: 'Martillo', Description:'Forjada de acero al cromo vanadio dos veces más resistente al desgaste'});
     this.agregarItem();
   }
 
@@ -37,6 +41,8 @@ export class FerreteriaService {
       return item.id === id;
     })
   }
+
+
 
 
 }

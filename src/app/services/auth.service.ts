@@ -3,6 +3,7 @@ import { UsuarioModel } from '../models/usuario.model';
 import { HttpClient } from '@angular/common/http';
 import { map } from "rxjs/operators";
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class AuthService {
   private apiKey = 'AIzaSyAeIcbapWy-Tg6OT7sQZR850BW5uGBdRZc';
   userToken: string;
 
-  constructor(private http: HttpClient, private firebaseAuth: AngularFireAuth) {
+  constructor(private http: HttpClient, private firebaseAuth: AngularFireAuth, private afs: AngularFirestore) {
   }
 
   async login(usuario: UsuarioModel) {
