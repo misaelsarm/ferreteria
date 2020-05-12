@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'producto/:id', component: ItemDetailComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registro', component: RegistroComponent },
-  { path: '**', pathMatch: 'full', redirectTo: 'inicio' }
+  { path: '**', pathMatch: 'full', redirectTo: 'registro' }
 ];
 
 @NgModule({
