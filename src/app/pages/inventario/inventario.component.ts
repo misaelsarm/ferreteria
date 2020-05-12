@@ -27,15 +27,15 @@ export class InventarioComponent implements OnInit {
       title: 'Registro de producto',
       html:
         '<label>Nombre del producto:</label>' +
-        '<input id="nombre" class="swal2-input">' +
+        '<input autocomplete="off" id="nombre" class="swal2-input">' +
         '<label>Precio:</label><br>' +
-        '<input type="number" id="precio" class="swal2-input"><br>'+
+        '<input autocomplete="off" type="number" id="precio" class="swal2-input"><br>'+
         '<label>Descripción:</label>' +
-        '<input id="descripcion" class="swal2-input">'+
+        '<input autocomplete="off" id="descripcion" class="swal2-input">'+
         '<label>Marca:</label>' +
         '<input id="marca" class="swal2-input">'+
         '<label>En existencia:</label><br>' +
-        '<input type="number" id="enExistencia" class="swal2-input">',
+        '<input autocomplete="off" type="number" id="enExistencia" class="swal2-input">',
       focusConfirm: false,
       preConfirm: () => {
         return []
@@ -44,16 +44,15 @@ export class InventarioComponent implements OnInit {
     
     if (formValues) {
       this.afs.collection('Products').doc(id.getTime().toString()).set({
-        nombre: document.getElementById('nombre').value,
-        precio:document.getElementById('precio').value,
+        nombre: (<HTMLInputElement>document.getElementById('nombre')).value,
+        precio:(<HTMLInputElement>document.getElementById('precio')).value,
         // imagenURL: this.item.imagenURL,
-        descripcion:  document.getElementById('descripcion').value,
-        marca: document.getElementById('marca').value,
-        enExistencia: document.getElementById('enExistencia').value
+        descripcion: (<HTMLInputElement> document.getElementById('descripcion')).value,
+        marca: (<HTMLInputElement>document.getElementById('marca')).value,
+        enExistencia: (<HTMLInputElement>document.getElementById('enExistencia')).value
       });
     }
   }
 
 
 }
-
