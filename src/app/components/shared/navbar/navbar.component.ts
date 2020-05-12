@@ -1,4 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -6,11 +9,17 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+  @Input() loggedIn;
 
-  @Input() loggedIn = true;
-  constructor() { }
+  constructor(private auth: AuthService, private route: Router, private firebaseAuth: AngularFireAuth) { }
 
   ngOnInit(): void {
+  }
+
+  logOut() {
+    this.firebaseAuth.signOut();
+    this.route.navigateByUrl('login');
+
   }
 
 }

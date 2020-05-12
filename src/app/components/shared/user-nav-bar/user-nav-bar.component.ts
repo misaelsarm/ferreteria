@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth/';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-user-nav-bar',
@@ -7,10 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserNavBarComponent implements OnInit {
 
+  currentUser = '';
   verLista: boolean;
   verCuadricula: boolean;
 
-  constructor() { }
+  constructor(private auth: AngularFireAuth, private afs: AngularFirestore) {
+    const user = this.auth.user;
+    user.subscribe((resp) => {
+      if (resp) {
+        const name = this.afs.collection('Users').doc(resp.uid);
+        name.get().toPromise().then((doc) => {
+          const data = doc.data();
+          this.currentUser = data.nombreCompleto;
+        });
+      }
+    })
+  }
 
   ngOnInit(): void {
   }

@@ -23,29 +23,30 @@ export class RegistroComponent {
     if (form.invalid) {
       return;
     }
-    this.auth.nuevoUsuario(this.usuario).subscribe((resp: any) => {
-      this.afs.collection('Users').doc(resp.localId).set({
+
+    this.auth.nuevoUsuario(this.usuario).then((cred) => {
+      console.log(cred);
+      this.afs.collection('Users').doc(cred.user.uid).set({
         nombre: this.usuario.nombre,
         apellido: this.usuario.apellido,
         email: this.usuario.email,
         nombreCompleto: `${this.usuario.nombre} ${this.usuario.apellido}`,
         tipoUsuario: Roles.ReadOnly,
       })
-      console.log(resp);
       Swal.fire({
-        title: 'Registro correcto',
-        text: 'El usuario se registro de manera exitosa',
+        title: 'Registro exitoso',
+        text: `Bienvenido ${this.usuario.nombre} ${this.usuario.apellido}`,
         icon: 'success',
         confirmButtonText: 'Cerrar'
       }).then(() => {
-        this.router.navigateByUrl('login');
+        this.router.navigateByUrl('inicio');
       });
-    }, (err) => {
-      console.error(err.error.error.message);
-      if (err.error.error.message === 'EMAIL_EXISTS') {
+    }).catch((err) => {
+      console.log(err);
+      if (err.code === 'auth/email-already-in-use') {
         Swal.fire({
           title: 'Error',
-          text: 'El correo ya existe',
+          text: 'El correo ingresado ya existe',
           icon: 'error',
           confirmButtonText: 'Cerrar'
         });

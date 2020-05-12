@@ -4,6 +4,7 @@ import { UsuarioModel } from 'src/app/models/usuario.model';
 import { AuthService } from 'src/app/services/auth.service';
 import Swal from 'sweetalert2';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ export class LoginComponent implements OnInit {
 
   usuario: UsuarioModel = new UsuarioModel();
 
-  constructor(private auth: AuthService, private afs: AngularFirestore) { }
+  constructor(private auth: AuthService, private afs: AngularFirestore, private route: Router) {
+  }
 
   ngOnInit(): void {
   }
@@ -23,22 +25,20 @@ export class LoginComponent implements OnInit {
     if (form.invalid) {
       return;
     }
-    this.auth.login(this.usuario).subscribe((resp: any) => {
-      let user = this.afs.collection('Users').doc(resp.localId);
-      user.get().toPromise().then(doc => {
-        let data = doc.data();
-        console.log(data.nombreCompleto);
+    this.auth.login(this.usuario).then((cred) => {
+      this.route.navigateByUrl('inicio')
+      const user = this.afs.collection('Users').doc(cred.user.uid);
+      user.get().toPromise().then((doc) => {
+        const data = doc.data();
         Swal.fire({
-          //title: `Bienvenido ${resp['email']}`,
-          text: `Bienvenido ${data.nombre}`,
+          text: `Bienvenido ${data.nombreCompleto}`,
           icon: 'success',
           confirmButtonText: 'Cerrar'
         })
-      })
-      console.log(resp.localId);
-    }, (err) => {
-      console.log(err.error.error.message);
-      if (err.error.error.message === 'EMAIL_NOT_FOUND') {
+      });
+    }).catch((err) => {
+      console.log(err);
+      if (err.code === 'auth/user-not-found') {
         Swal.fire({
           title: 'Error',
           text: 'El correo ingresado no existe',
@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
           confirmButtonText: 'Cerrar'
         });
       }
-      if (err.error.error.message === 'INVALID_PASSWORD') {
+      if (err.code === 'auth/wrong-password') {
         Swal.fire({
           title: 'Error',
           text: 'La contraseña es incorrecta',
@@ -56,5 +56,4 @@ export class LoginComponent implements OnInit {
       }
     });
   }
-
 }
