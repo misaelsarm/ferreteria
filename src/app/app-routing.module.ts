@@ -4,11 +4,11 @@ import { HomeComponent } from './pages/home/home.component';
 import { BuscarComponent } from './pages/buscar/buscar.component';
 import { AjustesComponent } from './pages/ajustes/ajustes.component';
 import { PedidosComponent } from './pages/pedidos/pedidos.component';
-import { ItemsComponent } from './components/items/items.component';
 import { ItemDetailComponent } from './components/item-detail/item-detail.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegistroComponent } from './pages/registro/registro.component';
 import { InventarioComponent } from './pages/inventario/inventario.component';
+import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 
 
 const routes: Routes = [
@@ -18,6 +18,7 @@ const routes: Routes = [
   { path: 'inventario', component: InventarioComponent },
   { path: 'ajustes', component: AjustesComponent },
   { path: 'producto/:id', component: ItemDetailComponent },
+  { path: 'usuarios', component: UsuariosComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registro', component: RegistroComponent },
   { path: '**', pathMatch: 'full', redirectTo: 'registro' }

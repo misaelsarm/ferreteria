@@ -18,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from "../environments/environment";
 import { InventarioComponent } from './pages/inventario/inventario.component';
+import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 //import { AngularFirestoreModule } from '@angular/fire/firestore/public_api';
 
 @NgModule({
@@ -33,7 +34,8 @@ import { InventarioComponent } from './pages/inventario/inventario.component';
     UserNavBarComponent,
     LoginComponent,
     RegistroComponent,
-    InventarioComponent
+    InventarioComponent,
+    UsuariosComponent
   ],
   imports: [
     BrowserModule,
