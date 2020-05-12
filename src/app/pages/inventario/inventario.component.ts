@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {NgModule} from "@angular/core";
+import { NgModule } from "@angular/core";
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { Item } from 'src/app/models/item.model';
+import { FerreteriaService } from 'src/app/services/ferreteria.service';
 
 
 @Component({
@@ -15,15 +16,17 @@ import { Item } from 'src/app/models/item.model';
 export class InventarioComponent implements OnInit {
 
   item = new Item();
-  
-  constructor() { }
+
+  constructor(private ferreteria: FerreteriaService) { }
 
   ngOnInit(): void {
   }
 
-OnclickSubmit(formData){
-  alert("Item Name: " + formData.Name);
-}
+  OnclickSubmit(formData) {
+    this.ferreteria.agregarItem(this.item)
+    console.log(formData);
+  }
+
 
 }
 

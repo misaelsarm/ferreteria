@@ -4,12 +4,12 @@
         <form #f="ngForm" (ngSubmit)="OnclickSubmit(f)">
             <p>
                 <label>Item Name:</label>
-                <input type="text"  placeholder="Name" name="Name"
+                <input type="text"  placeholder="Name" name="nombre"
                     [(ngModel)]="item.nombre" required>
             </p>
             <p>
                 <label>Description:</label>
-                <input type="password"  placeholder="Description" name="Description"
+                <input type="text"  placeholder="Description" name="descripcion"
                     [(ngModel)]="item.descripcion" required>
             </p>
             <p>
