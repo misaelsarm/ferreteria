@@ -8,20 +8,21 @@ import { AngularFirestore } from '@angular/fire/firestore';
 })
 export class FerreteriaService {
 
+  item = new Item();
   items: Item[] = [];
 
   constructor(private afs: AngularFirestore) {
-    const productCollection = afs.collection('Products');
-    productCollection.add({Name: 'Martillo', Description:'Forjada de acero al cromo vanadio dos veces más resistente al desgaste'});
-    this.agregarItem();
+    
+    // this.agregarItem();
   }
 
-  agregarItem() {
-    var i=0
-    for(i=0;i<12;i++){
-      var item = new Item(57392937568, 'Martillo', 139, 'assets/img/martillo.PNG', 'Forjada de acero al cromo vanadio dos veces más resistente al desgaste.', 'Truper', true, 25);
-      this.items.push(item);
-    }
+  agregarItem(this.item) {
+    const productCollection = this.afs.collection('Products');
+    productCollection.add({
+      Name: this.item.nombre, 
+      Description: this.item.descripcion,
+    });
+    
     // const item2 = new item(57392937589, 'martillo', 139, 'assets/img/martillo.png', 'forjada de acero al cromo vanadio dos veces más resistente al desgaste.', 'truper', true, 25);
     // const item3 = new item(57392937578, 'martillo', 139, 'assets/img/martillo.png', 'forjada de acero al cromo vanadio dos veces más resistente al desgaste.', 'truper', true, 25);
     // const item4 = new item(57392993758, 'martillo', 139, 'assets/img/martillo.png', 'forjada de acero al cromo vanadio dos veces más resistente al desgaste.', 'truper', true, 25);
@@ -46,3 +47,4 @@ export class FerreteriaService {
 
 
 }
+
