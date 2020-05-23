@@ -1,11 +1,7 @@
 <div class="component">
-    <div class="right" style="position: relative;">
-        <form #f="ngForm" (ngSubmit)="OnclickSubmit()">
-        
-            <div class="actions">
-                <button type="submit" class="registro">Registrar producto</button>
-            </div>
-
-        </form>
+    <h2>Inventario de productos</h2>
+    <div class="flex-contenedor">
+        <app-producto-lista [producto]="producto" *ngFor="let producto of productos">
+        </app-producto-lista>
     </div>
 </div>

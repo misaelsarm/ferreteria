@@ -1,12 +1,43 @@
 <div class="component">
-  <h2>Registro de usuarios administradores</h2>
-  <div class="right" style="position: relative;">
+    <div class="w-100 d-flex justify-content-between">
+        <h2>Usuarios</h2>
+        <div>
+            <button class="m-3 btn btn-primary">Registrar nuevo usuario</button>
+            <input placeholder="Buscar usuario" class="m-3" type="text">
+        </div>
+    </div>
+    <div style="background-color: white;">
+        <table class="table">
+            <thead>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+                <th>Tipo de usuario</th>
+                <th>Acciones</th>
+            </thead>
+            <tbody>
+                <tr (click)="verUsuario(usuario)" *ngFor="let usuario of usuarios">
+                    <td>{{usuario.nombre}}</td>
+                    <td>{{usuario.apellido}}</td>
+                    <td>{{usuario.email}}</td>
+                    <td>{{usuario.tipoUsuario}}</td>
+                    <td class="acciones">
+                        <div>
+                            <span class="icono mdi mdi-pencil"></span>
+                        </div>
+                        <div>
+                            <span class="icono delete mdi mdi-trash-can"></span>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- <div class="right" style="position: relative;">
       <form #f="ngForm" (ngSubmit)="OnclickSubmit()">
-
           <div class="actions">
               <button type="submit" class="registro">Registrar nuevo usuario</button>
           </div>
-
       </form>
-  </div>
+  </div> -->
 </div>

@@ -1,44 +1,59 @@
 import { Injectable } from '@angular/core';
 import { Item } from '../models/item.model';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FerreteriaService {
 
-  item = new Item();
-  items: Item[] = [];
-  constructor(private afs: AngularFirestore) {
+  productsCollection: AngularFirestoreCollection<Item>;
+  products: Observable<any>;
 
-    // this.agregarItem();
+  usersCollection: AngularFirestoreCollection<any>;
+  users: Observable<any>;
+
+
+  constructor(private angularFirestore: AngularFirestore) {
+    this.getProductsCollection();
+    this.getUsersCollection();
   }
 
-  agregarItem(item: Item) {
-    /* this.afs.collection('Products').doc('test').set({
-      nombre: this.item.nombre,
-      descripcion: this.item.descripcion
-    }); */
-    console.log(this.item.nombre)
-
-
-    // const item2 = new item(57392937589, 'martillo', 139, 'assets/img/martillo.png', 'forjada de acero al cromo vanadio dos veces más resistente al desgaste.', 'truper', true, 25);
-    // const item3 = new item(57392937578, 'martillo', 139, 'assets/img/martillo.png', 'forjada de acero al cromo vanadio dos veces más resistente al desgaste.', 'truper', true, 25);
-    // const item4 = new item(57392993758, 'martillo', 139, 'assets/img/martillo.png', 'forjada de acero al cromo vanadio dos veces más resistente al desgaste.', 'truper', true, 25);
-    // const item5 = new item(57392937568, 'martillo', 139, 'assets/img/martillo.png', 'forjada de acero al cromo vanadio dos veces más resistente al desgaste.', 'truper', true, 25);
-    // const item6 = new item(57392937589, 'martillo', 139, 'assets/img/martillo.png', 'forjada de acero al cromo vanadio dos veces más resistente al desgaste.', 'truper', true, 25);
-    // const item7 = new item(57392937578, 'martillo', 139, 'assets/img/martillo.png', 'forjada de acero al cromo vanadio dos veces más resistente al desgaste.', 'truper', true, 25);
-    // const item8 = new item(57392993758, 'martillo', 139, 'assets/img/martillo.png', 'forjada de acero al cromo vanadio dos veces más resistente al desgaste.', 'truper', true, 25);
-    /* const item2 = new Item(2, 'Desarmador', 29, 'assets/img/desarmador.PNG');
-    const item3 = new Item(3, 'Brocha', 40, 'assets/img/brocha.PNG');
-    const item4 = new Item(4, 'Pinzas', 99, 'assets/img/pinzas.PNG'); */
+  registrarProducto(item: Item) {
+    this.productsCollection.add(item);
   }
 
-  obtenerProducto(id: number) {
-    return this.items.find(item => {
-      return item.id === id;
-    })
+  obtenerProductos() {
+    return this.products;
+  }
+
+  obtenerUsuarios() {
+    return this.users;
+  }
+
+
+  getProductsCollection() {
+    this.productsCollection = this.angularFirestore.collection('Products');
+    this.products = this.productsCollection.snapshotChanges().pipe(map(changes => {
+      return changes.map(a => {
+        const data = a.payload.doc.data() as any;
+        data.id = a.payload.doc.id;
+        return data;
+      });
+    }));
+  }
+
+  getUsersCollection() {
+    this.usersCollection = this.angularFirestore.collection('Users');
+    this.users = this.usersCollection.snapshotChanges().pipe(map(changes => {
+      return changes.map(a => {
+        const data = a.payload.doc.data() as any;
+        data.id = a.payload.doc.id;
+        return data;
+      });
+    }));
   }
 }
-

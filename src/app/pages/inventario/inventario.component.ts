@@ -13,14 +13,18 @@ import Swal from 'sweetalert2';
 
 export class InventarioComponent implements OnInit {
 
-  item = new Item();
+  productos = []
 
-  constructor(private afs: AngularFirestore) { }
+  constructor(private afs: AngularFirestore, private ferreteriaService: FerreteriaService) { }
 
   ngOnInit(): void {
+    this.ferreteriaService.obtenerProductos().subscribe(items => {
+      this.productos = items;
+      console.log(this.productos);
+    })
   }
 
-  async OnclickSubmit() {
+  /* async OnclickSubmit() {
     const id = new Date();
 
     const { value: formValues } = await Swal.fire({
@@ -41,18 +45,16 @@ export class InventarioComponent implements OnInit {
         return [];
       }
     });
-
     if (formValues) {
       this.afs.collection('Products').doc(id.getTime().toString()).set({
-        nombre: ( document.getElementById('nombre') as HTMLInputElement).value,
-        precio: ( document.getElementById('precio') as HTMLInputElement).value,
-        // imagenURL: this.item.imagenURL,
+        nombre: (document.getElementById('nombre') as HTMLInputElement).value,
+        precio: (document.getElementById('precio') as HTMLInputElement).value,
         descripcion: (document.getElementById('descripcion') as HTMLInputElement).value,
-        marca: ( document.getElementById('marca') as HTMLInputElement).value,
-        enExistencia: ( document.getElementById('enExistencia') as HTMLInputElement).value
+        marca: (document.getElementById('marca') as HTMLInputElement).value,
+        enExistencia: (document.getElementById('enExistencia') as HTMLInputElement).value
       });
     }
   }
-
+ */
 
 }

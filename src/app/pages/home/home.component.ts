@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { FerreteriaService } from 'src/app/services/ferreteria.service';
 
 @Component({
   selector: 'app-home',
@@ -8,11 +9,14 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private auth: AuthService) {
+  productos = [];
 
-   }
+  constructor(private auth: AuthService, private ferreteriaService: FerreteriaService) {
+
+  }
 
   ngOnInit(): void {
+
   }
 
 }

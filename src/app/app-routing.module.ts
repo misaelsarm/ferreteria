@@ -4,7 +4,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { BuscarComponent } from './pages/buscar/buscar.component';
 import { AjustesComponent } from './pages/ajustes/ajustes.component';
 import { PedidosComponent } from './pages/pedidos/pedidos.component';
-import { ItemDetailComponent } from './components/item-detail/item-detail.component';
+import { ItemDetailComponent } from './components/producto-detalle/producto-detalle.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegistroComponent } from './pages/registro/registro.component';
 import { InventarioComponent } from './pages/inventario/inventario.component';

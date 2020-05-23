@@ -51,6 +51,14 @@ export class RegistroComponent {
           confirmButtonText: 'Cerrar'
         });
       }
+      if (err.code === 'auth/network-request-failed') {
+        Swal.fire({
+          title: 'Error',
+          text: 'Ocurrio un problema de conexión. Por favor intenta mas tarde.',
+          icon: 'error',
+          confirmButtonText: 'Cerrar'
+        });
+      }
     });
   }
 }

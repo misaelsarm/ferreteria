@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import Swal from 'sweetalert2';
-import { Roles } from 'src/app/models/usuario.model';
+import { Roles, UsuarioModel } from 'src/app/models/usuario.model';
+import { FerreteriaService } from 'src/app/services/ferreteria.service';
 
 @Component({
   selector: 'app-usuarios',
@@ -10,14 +11,23 @@ import { Roles } from 'src/app/models/usuario.model';
 })
 export class UsuariosComponent implements OnInit {
 
-  constructor(private afs: AngularFirestore) { }
+  usuarios = [];
+
+  constructor(private ferreteriaService: FerreteriaService) { }
 
   ngOnInit(): void {
+    this.ferreteriaService.obtenerUsuarios().subscribe(usuarios => {
+      this.usuarios = usuarios;
+      console.log(this.usuarios);
+    })
   }
 
-  async OnclickSubmit() {
-    const id = new Date();
+  verUsuario(usuario: UsuarioModel) {
+    console.log(usuario);
+  }
 
+  /* async OnclickSubmit() {
+    const id = new Date();
     const { value: formValues } = await Swal.fire({
       title: 'Registro de administradores',
       html:
@@ -37,12 +47,9 @@ export class UsuariosComponent implements OnInit {
         return [];
       }
     });
-
     if (formValues) {
-
       let email = document.getElementById('email')
       let password = document.getElementById('password')
-
       this.afs.collection('Users').doc(id.getTime().toString()).set({
         nombre: (document.getElementById('nombre') as HTMLInputElement).value,
         apellido: (document.getElementById('apellido') as HTMLInputElement).value,
@@ -50,6 +57,6 @@ export class UsuariosComponent implements OnInit {
         tipoUsuario: Roles.Admin,
       });
     }
-  }
+  } */
 
 }

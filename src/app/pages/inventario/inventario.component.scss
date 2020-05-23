@@ -1,4 +1,4 @@
-.sign-up-container {
+/* .sign-up-container {
     display: flex;
     width: 100vw;
     height: 100vh;
@@ -118,4 +118,10 @@
             }
         }
     }
+} */
+
+.flex-contenedor {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }

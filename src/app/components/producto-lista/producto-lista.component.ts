@@ -2,11 +2,13 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FerreteriaService } from 'src/app/services/ferreteria.service';
 
 @Component({
-  selector: 'app-items',
-  templateUrl: './items.component.html',
-  styleUrls: ['./items.component.scss']
+  selector: 'app-producto-lista',
+  templateUrl: './producto-lista.component.html',
+  styleUrls: ['./producto-lista.component.scss']
 })
-export class ItemsComponent implements OnInit {
+export class ProductoListaComponent implements OnInit {
+
+  @Input() producto: any;
 
   constructor(public ferreteriaService: FerreteriaService) {
   }
