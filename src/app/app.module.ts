@@ -18,6 +18,9 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { InventarioComponent } from './pages/inventario/inventario.component';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule, ToastContainerModule } from 'ngx-toastr';
+import { AngularFireStorageModule, BUCKET } from '@angular/fire/storage';
 
 @NgModule({
   declarations: [
@@ -40,9 +43,16 @@ import { UsuariosComponent } from './pages/usuarios/usuarios.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    AngularFireModule.initializeApp(environment.firebase)
+    AngularFireModule.initializeApp(environment.firebase),
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(),
+    ToastContainerModule,
+    AngularFireStorageModule
   ],
-  providers: [],
+  providers: [{
+    provide: BUCKET,
+    useValue: 'ferreteria-32f85.appspot.com'
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

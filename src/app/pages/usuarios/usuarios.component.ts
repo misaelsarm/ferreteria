@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import Swal from 'sweetalert2';
-import { Roles, UsuarioModel } from 'src/app/models/usuario.model';
+import { UsuarioModel } from 'src/app/models/usuario.model';
 import { FerreteriaService } from 'src/app/services/ferreteria.service';
 
 @Component({
@@ -12,6 +10,15 @@ import { FerreteriaService } from 'src/app/services/ferreteria.service';
 export class UsuariosComponent implements OnInit {
 
   usuarios = [];
+  usuario = {
+    nombre: '',
+    apellido: '',
+    email: '',
+    tipoUsuario: ''
+  };
+
+  showModal = false;
+  accion = '';
 
   constructor(private ferreteriaService: FerreteriaService) { }
 
@@ -22,8 +29,41 @@ export class UsuariosComponent implements OnInit {
     })
   }
 
+  /**
+   *
+   * Ver un usuario en particular. Muestra el modal con los datos del usuario.
+   */
   verUsuario(usuario: UsuarioModel) {
-    console.log(usuario);
+    this.showModal = true;
+    this.accion = 'Modificar';
+    this.usuario.nombre = usuario.nombre;
+    this.usuario.apellido = usuario.apellido;
+    this.usuario.email = usuario.email;
+    this.usuario.tipoUsuario = usuario.tipoUsuario;
+    console.log(this.usuario);
+  }
+
+  /**
+   *
+   * Se ejecuta cuando se hace click en el boton 'Registrar nuevo usuario'
+   */
+  nuevoUsuario() {
+    this.showModal = true;
+    this.accion = 'Registrar nuevo';
+  }
+
+  cancelar() {
+    this.showModal = !this.showModal;
+    this.limpiar();
+  }
+
+  limpiar() {
+    this.usuario = {
+      nombre: '',
+      apellido: '',
+      email: '',
+      tipoUsuario: ''
+    }
   }
 
   /* async OnclickSubmit() {

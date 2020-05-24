@@ -9,6 +9,7 @@ import { FerreteriaService } from 'src/app/services/ferreteria.service';
 export class ProductoListaComponent implements OnInit {
 
   @Input() producto: any;
+  @Input() imgUrl: any;
 
   constructor(public ferreteriaService: FerreteriaService) {
   }

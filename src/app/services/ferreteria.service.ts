@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Item } from '../models/item.model';
+import { Producto } from '../models/producto.model';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
@@ -10,8 +10,10 @@ import { map } from 'rxjs/operators';
 })
 export class FerreteriaService {
 
-  productsCollection: AngularFirestoreCollection<Item>;
+  productsCollection: AngularFirestoreCollection<Producto>;
   products: Observable<any>;
+
+
 
   usersCollection: AngularFirestoreCollection<any>;
   users: Observable<any>;
@@ -22,8 +24,9 @@ export class FerreteriaService {
     this.getUsersCollection();
   }
 
-  registrarProducto(item: Item) {
-    this.productsCollection.add(item);
+  registrarProducto(producto: Producto) {
+    this.productsCollection.add(producto);
+    console.log(producto);
   }
 
   obtenerProductos() {
@@ -34,8 +37,8 @@ export class FerreteriaService {
     return this.users;
   }
 
-
   getProductsCollection() {
+
     this.productsCollection = this.angularFirestore.collection('Products');
     this.products = this.productsCollection.snapshotChanges().pipe(map(changes => {
       return changes.map(a => {

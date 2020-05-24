@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FerreteriaService } from 'src/app/services/ferreteria.service';
-import { Item } from 'src/app/models/item.model';
+import { Producto } from 'src/app/models/producto.model';
 
 @Component({
   selector: 'app-producto-detalle',
@@ -10,7 +10,7 @@ import { Item } from 'src/app/models/item.model';
 })
 export class ItemDetailComponent implements OnInit {
 
-  item: Item;
+  //item: Item;
   constructor(private route: ActivatedRoute, public ferreteriaService: FerreteriaService) {
     /* const id = +this.route.snapshot.paramMap.get('id');
     this.item = ferreteriaService.obtenerProducto(id);

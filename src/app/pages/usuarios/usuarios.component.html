@@ -2,7 +2,7 @@
     <div class="w-100 d-flex justify-content-between">
         <h2>Usuarios</h2>
         <div>
-            <button class="m-3 btn btn-primary">Registrar nuevo usuario</button>
+            <button (click)="nuevoUsuario()" class="m-3 btn btn-primary">Registrar nuevo usuario</button>
             <input placeholder="Buscar usuario" class="m-3" type="text">
         </div>
     </div>
@@ -16,13 +16,13 @@
                 <th>Acciones</th>
             </thead>
             <tbody>
-                <tr (click)="verUsuario(usuario)" *ngFor="let usuario of usuarios">
+                <tr *ngFor="let usuario of usuarios">
                     <td>{{usuario.nombre}}</td>
                     <td>{{usuario.apellido}}</td>
                     <td>{{usuario.email}}</td>
                     <td>{{usuario.tipoUsuario}}</td>
                     <td class="acciones">
-                        <div>
+                        <div (click)="verUsuario(usuario)">
                             <span class="icono mdi mdi-pencil"></span>
                         </div>
                         <div>
@@ -33,11 +33,34 @@
             </tbody>
         </table>
     </div>
-    <!-- <div class="right" style="position: relative;">
-      <form #f="ngForm" (ngSubmit)="OnclickSubmit()">
-          <div class="actions">
-              <button type="submit" class="registro">Registrar nuevo usuario</button>
-          </div>
-      </form>
-  </div> -->
+</div>
+
+<div [ngStyle]="{'background': showModal ? 'rgba(0, 0, 0, 0.295)':'', 'z-index': showModal ? '99': '-99'}"
+    class="wrapper">
+    <div [ngStyle]="{'transform': showModal ? 'scale(1)' : 'scale(0)'}" class="custom-modal">
+        <h2>{{accion}} usuario</h2>
+        <div class="fields">
+            <div class="field">
+                <label for="">Nombre </label>
+                <br>
+                <input type="text" [value]="usuario.nombre">
+            </div>
+            <div class="field">
+                <label for="">Apellido </label>
+                <br>
+                <input type="text" [value]="usuario.apellido">
+            </div>
+            <div class="field">
+                <label for="">Email </label>
+                <br>
+                <input type="text" [value]="usuario.email">
+            </div>
+        </div>
+        <div class="d-flex justify-content-end">
+            <button (click)="cancelar()" style="background: rgb(231, 231, 231); color: #007bff;"
+                class="m-2 btn">Cancelar</button>
+            <button *ngIf="accion==='Registrar nuevo'" class="m-2 btn btn-primary">Registrar</button>
+            <button *ngIf="accion==='Modificar'" class="m-2 btn btn-primary">Actualizar</button>
+        </div>
+    </div>
 </div>
