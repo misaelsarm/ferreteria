@@ -13,8 +13,6 @@ export class FerreteriaService {
   productsCollection: AngularFirestoreCollection<Producto>;
   products: Observable<any>;
 
-
-
   usersCollection: AngularFirestoreCollection<any>;
   users: Observable<any>;
 

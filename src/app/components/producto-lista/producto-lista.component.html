@@ -5,6 +5,8 @@
     <p>{{producto.marca}}</p>
     <p>{{producto.nombre}}</p>
     <p>{{producto.id}}</p>
-    <img class="img-fluid" [src]="producto.imagenURL" alt="">
-    <button class="mt-4 btn btn-primary ">Ver producto</button>
+    <div class="thumbnail">
+        <div [ngStyle]="{'background-image': 'url('+producto.imagenURL+')'}" class="thumb-img"></div>
+    </div>
+    <button class="mt-4 btn btn-primary btn-block">Ver producto</button>
 </div>

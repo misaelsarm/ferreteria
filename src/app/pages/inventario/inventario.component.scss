@@ -1,125 +1,3 @@
-/* .sign-up-container {
-    display: flex;
-    width: 100vw;
-    height: 100vh;
-    .left {
-        background: url('../../../assets/img/tools.jpg');
-        background-size: cover;
-        background-repeat: no-repeat;
-        width: 100%;
-        height: 100%;
-    }
-    .registro{
-    margin: 9px;
-    background: #41b0ff;
-    color: white;
-    border: solid transparent;
-    border-radius: 11%;
-    padding: 5px;
-    font-weight: 600;
-    }
-    .right {
-        background: white;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        .sign-up {
-            //background: rgba(153, 205, 50, 0.411);
-            width: 60%;
-            height: 70%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            align-items: center;
-            .title {
-                width: 80%;
-                text-align: center;
-                font-weight: bold;
-                font-size: 30px;
-            }
-            .inputs {
-                // background: rgba(0, 0, 255, 0.158);
-                .datos {
-                    display: flex;
-                    //  background: rgba(255, 0, 0, 0.788);
-                    .input {
-                        //   background: purple;
-                        margin: 4px;
-                        width: 50%;
-                    }
-                }
-                width: 100%;
-                input::-webkit-input-placeholder {
-                    font-size: 12px;
-                }
-                input {
-                    width: 100%;
-                    background: #EFEFEF;
-                    border: none;
-                    border-radius: 5px;
-                    outline: none;
-                    height: 35px;
-                    padding-left: 15px;
-                    transition: all 0.3s ease;
-                    &:hover {
-                        background: rgba(128, 128, 128, 0.233);
-                    }
-                }
-            }
-            .actions {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-                button {
-                    background: #3341ff;
-                    color: white;
-                    width: 70%;
-                    border: none;
-                    outline: none;
-                    height: 35px;
-                    border-radius: 20px;
-                }
-                a {
-                    font-size: 14px;
-                    color: #3341ff;
-                }
-            }
-        }
-    }
-}
-
-@media screen and (max-width: 576px) {
-    .sign-up-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        background: url('../../../assets/img/tools.jpg');
-        .left {
-            display: none;
-        }
-        .right {
-            border-radius: 10px;
-            width: 90%;
-            height: 60%;
-            .sign-up {
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                align-items: center;
-                width: 90%;
-                height: 85%;
-                label {
-                    font-size: 14px;
-                }
-            }
-        }
-    }
-} */
-
 input {
     transition: all 0.5s ease;
     border: 2px solid white;
@@ -145,6 +23,7 @@ input {
     align-items: center;
     //background: rgba(0, 0, 0, 0.295);
     position: fixed;
+    overflow: hidden;
     .custom-modal {
         box-shadow: 0px 18px 26px -9px rgba(120, 120, 120, 1);
         transition: all 0.3s ease;
@@ -160,8 +39,37 @@ input {
                     width: 100%;
                     background: rgb(238, 237, 237);
                 }
+                input[type="file"] {
+                    display: none;
+                }
                 margin: 15px;
+            }
+            .field-upload {
+                cursor: pointer;
+                text-align: center;
+                background: rgb(25, 108, 231);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: white;
+                border-radius: 5px;
+                height: 40px;
+                width: 200px;
+                margin-top: 45px;
+                span {
+                    cursor: pointer;
+                    padding-right: 30px;
+                }
+                label {
+                    cursor: pointer;
+                    width: 100%;
+                    margin: 10px;
+                }
             }
         }
     }
+}
+
+.animate__fadeInDown {
+    --animate-duration: 500ms;
 }

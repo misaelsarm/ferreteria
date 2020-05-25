@@ -1,11 +1,10 @@
-import { Component, OnInit, ɵConsole } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FerreteriaService } from 'src/app/services/ferreteria.service';
 import { Producto } from 'src/app/models/producto.model';
 import { ToastrService } from 'ngx-toastr';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
-
 
 @Component({
   selector: 'app-inventario',
@@ -23,7 +22,6 @@ export class InventarioComponent implements OnInit {
     file: '',
     fileName: ''
   };
-  //imgUrl: Observable<string | null>;
   uploadPercent: Observable<number>;
   constructor(private storage: AngularFireStorage, private ferreteriaService: FerreteriaService, private toastr: ToastrService) { }
 
@@ -46,10 +44,8 @@ export class InventarioComponent implements OnInit {
       marca: this.producto.marca,
       enExistenciaDisponibles: this.producto.enExistenciaDisponibles,
       precio: this.producto.precio,
-      nombreImagen: this.fileData.fileName,
       imagenURL: this.producto.imagenURL,
     }
-    //this.uploadFile();
     this.ferreteriaService.registrarProducto(this.producto);
     this.toastr.success('Se registro un nuevo producto exitosamente.', 'Inventario', {
       timeOut: 3000,
@@ -78,12 +74,7 @@ export class InventarioComponent implements OnInit {
       )).subscribe();
   }
 
-  uploadFile() {
-
-  }
-
   cancelar() {
     this.showModal = !this.showModal;
-    //this.uploadFile();
   }
 }
