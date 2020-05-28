@@ -25,10 +25,11 @@ input {
     position: fixed;
     overflow: hidden;
     .custom-modal {
+        overflow-y: scroll;
         box-shadow: 0px 18px 26px -9px rgba(120, 120, 120, 1);
         transition: all 0.3s ease;
         padding: 30px;
-        height: auto;
+        height: 50%;
         width: 900px;
         background: white;
         .fields {

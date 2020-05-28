@@ -1,19 +1,19 @@
-<!-- <div class="component">
+<div class="component">
   <div class="card mb-3 w-100 h-100">
     <div class="row no-gutters">
         <div class="col-md-4">
-            <img [src]="item.imagenURL" class="card-img w-50" alt="...">
+            <img [src]="producto.imagenURL" class="card-img w-50" alt="...">
         </div>
         <div class="col-md-8">
             <div class="card-body">
-                <h5 class="card-title">{{item.nombre}}</h5>
-                <h5>{{item.marca}}</h5>
-                <p>Código: {{item.id}}</p>
-                <p class="card-text">{{item.descripcion}}</p>
-                <h5>{{item.precio | currency}}</h5>
+                <h5 class="card-title">{{producto.nombre}}</h5>
+                <h5>{{producto.marca}}</h5>
+                <p>Código: {{producto.id}}</p>
+                <p class="card-text">{{producto.descripcion}}</p>
+                <h5>{{producto.precio | currency}}</h5>
                 <div class="d-flex justify-content-between">
-                    <p *ngIf="item.enExistencia">En existencia: si</p>
-                    <p>Disponibles: {{item.enExistenciaDisponibles}}</p>
+                    <p *ngIf="producto.enExistencia">En existencia: si</p>
+                    <p>Disponibles: {{producto.enExistenciaDisponibles}}</p>
                 </div>
                 <div class="d-flex flex-wrap">
                     <a href="#" class="m-1 btn btn-primary">Agregar</a>
@@ -23,4 +23,3 @@
     </div>
 </div>
 </div>
- -->

@@ -9,7 +9,7 @@ export class UsuarioModel {
     nombreCompleto: string;
     password: string;
     email: string;
-    tipoUsuario: Roles.ReadOnly;
+    tipoUsuario: string;
     confirmPassword: string;
 }
 

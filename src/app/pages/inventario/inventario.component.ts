@@ -47,6 +47,7 @@ export class InventarioComponent implements OnInit {
       imagenURL: this.producto.imagenURL,
     }
     this.ferreteriaService.registrarProducto(this.producto);
+    console.log(this.producto);
     this.toastr.success('Se registro un nuevo producto exitosamente.', 'Inventario', {
       timeOut: 3000,
       progressBar: true,

@@ -8,13 +8,13 @@ import { Producto } from 'src/app/models/producto.model';
   templateUrl: './producto-detalle.component.html',
   styleUrls: ['./producto-detalle.component.scss']
 })
-export class ItemDetailComponent implements OnInit {
+export class ProductoDetalleComponent implements OnInit {
 
-  //item: Item;
+  producto;
   constructor(private route: ActivatedRoute, public ferreteriaService: FerreteriaService) {
-    /* const id = +this.route.snapshot.paramMap.get('id');
-    this.item = ferreteriaService.obtenerProducto(id);
-    console.log(this.item); */
+    const id = +this.route.snapshot.paramMap.get('id');
+    //this.producto = ferreteriaService.obtenerProducto(id);
+    console.log(this.producto);
   }
 
   ngOnInit(): void {

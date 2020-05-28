@@ -8,7 +8,7 @@ import { PedidosComponent } from './pages/pedidos/pedidos.component';
 import { AjustesComponent } from './pages/ajustes/ajustes.component';
 import { BuscarComponent } from './pages/buscar/buscar.component';
 import { ProductoListaComponent } from './components/producto-lista/producto-lista.component';
-import { ItemDetailComponent } from './components/producto-detalle/producto-detalle.component';
+import { ProductoDetalleComponent } from './components/producto-detalle/producto-detalle.component';
 import { UserNavBarComponent } from './components/shared/user-nav-bar/user-nav-bar.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegistroComponent } from './pages/registro/registro.component';
@@ -21,6 +21,8 @@ import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule, ToastContainerModule } from 'ngx-toastr';
 import { AngularFireStorageModule, BUCKET } from '@angular/fire/storage';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { CatalogoComponent } from './pages/catalogo/catalogo.component';
 
 @NgModule({
   declarations: [
@@ -31,12 +33,13 @@ import { AngularFireStorageModule, BUCKET } from '@angular/fire/storage';
     AjustesComponent,
     BuscarComponent,
     ProductoListaComponent,
-    ItemDetailComponent,
+    ProductoDetalleComponent,
     UserNavBarComponent,
     LoginComponent,
     RegistroComponent,
     InventarioComponent,
-    UsuariosComponent
+    UsuariosComponent,
+    CatalogoComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +55,9 @@ import { AngularFireStorageModule, BUCKET } from '@angular/fire/storage';
   providers: [{
     provide: BUCKET,
     useValue: 'ferreteria-32f85.appspot.com'
-  }],
+  }
+],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,7 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
+import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Router } from '@angular/router';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-navbar',
@@ -9,17 +8,30 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  @Input() loggedIn;
+  tipoUsuario: string;
 
-  constructor(private auth: AuthService, private route: Router, private firebaseAuth: AngularFireAuth) { }
+  constructor(
+    private firebaseAuth: AngularFireAuth,
+    private firestore: AngularFirestore
+  ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.firebaseAuth.onAuthStateChanged((user) => {
+      if (user) {
+        const document = this.firestore.collection('Users').doc(user.uid);
+        document.get().subscribe((doc) => {
+          this.tipoUsuario = doc.data().tipoUsuario;
+          console.log(doc.data().tipoUsuario);
+        });
+      } else {
+        console.log('not logged in');
+      }
+    });
   }
 
   logOut() {
-    this.firebaseAuth.signOut();
-    this.route.navigateByUrl('login');
-
+    this.firebaseAuth.signOut().then(() => {
+      window.location.href = '#/login';
+    });
   }
-
 }

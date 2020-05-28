@@ -26,15 +26,17 @@ export class LoginComponent implements OnInit {
       return;
     }
     this.auth.login(this.usuario).then((cred) => {
-      this.route.navigateByUrl('inicio')
       const user = this.afs.collection('Users').doc(cred.user.uid);
       user.get().toPromise().then((doc) => {
         const data = doc.data();
+
         Swal.fire({
           text: `Bienvenido ${data.nombreCompleto}`,
           icon: 'success',
           confirmButtonText: 'Cerrar'
-        })
+        }).then(() => {
+          window.location.href = '#/inicio';
+        });
       });
     }).catch((err) => {
       console.log(err);

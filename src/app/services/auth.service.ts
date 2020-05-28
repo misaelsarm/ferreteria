@@ -11,11 +11,9 @@ export class AuthService {
 
   usuario: UsuarioModel = new UsuarioModel();
 
-  logged: boolean;
+  tipoUsuario: 'string';
 
-  uid: string;
-
-  constructor(private firebaseAuth: AngularFireAuth) {
+  constructor(private firebaseAuth: AngularFireAuth, private firestore: AngularFirestore) {
   }
 
   async login(usuario: UsuarioModel) {
@@ -37,18 +35,6 @@ export class AuthService {
     const cred = await this.firebaseAuth.createUserWithEmailAndPassword(authData.email, authData.password);
     return cred;
   }
-
-  usuarioActual() {
-    this.firebaseAuth.user.subscribe((resp) => {
-      if (resp) {
-        this.logged = true;
-        this.uid = resp.uid;
-      } else {
-        this.logged = false;
-      }
-    })
-  }
-
 }
 
 

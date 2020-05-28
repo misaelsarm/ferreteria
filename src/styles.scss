@@ -82,6 +82,11 @@ nav {
     font-weight: 600;
 }
 
+.animate__fadeInDown {
+    --animate-duration: 500ms;
+}
+
+
 //tamaño de pantalla pequeño maximo hasta 576px de ancho
 
 /* // Medium devices (tablets, 768px and up)

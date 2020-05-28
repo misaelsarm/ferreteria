@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { UsuarioModel } from 'src/app/models/usuario.model';
+import { UsuarioModel, Roles } from 'src/app/models/usuario.model';
 import { FerreteriaService } from 'src/app/services/ferreteria.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-usuarios',
@@ -10,17 +13,17 @@ import { FerreteriaService } from 'src/app/services/ferreteria.service';
 export class UsuariosComponent implements OnInit {
 
   usuarios = [];
-  usuario = {
-    nombre: '',
-    apellido: '',
-    email: '',
-    tipoUsuario: ''
-  };
+  usuario: UsuarioModel = new UsuarioModel();
 
   showModal = false;
   accion = '';
 
-  constructor(private ferreteriaService: FerreteriaService) { }
+  constructor(
+    private ferreteriaService: FerreteriaService,
+    private auth: AuthService,
+    private firestore: AngularFirestore,
+    private toastr: ToastrService
+  ) { }
 
   ngOnInit(): void {
     this.ferreteriaService.obtenerUsuarios().subscribe(usuarios => {
@@ -62,41 +65,32 @@ export class UsuariosComponent implements OnInit {
       nombre: '',
       apellido: '',
       email: '',
-      tipoUsuario: ''
-    }
+      tipoUsuario: '',
+      password: '',
+      confirmPassword: '',
+      nombreCompleto: ''
+    };
   }
 
-  /* async OnclickSubmit() {
-    const id = new Date();
-    const { value: formValues } = await Swal.fire({
-      title: 'Registro de administradores',
-      html:
-        '<label>Nombre:</label>' +
-        '<input autocomplete="off" id="nombre" class="swal2-input">' +
-
-        '<label>Apellido:</label>' +
-        '<input autocomplete="off" id="apellido" class="swal2-input">' +
-
-        '<label>Correo:</label><br>' +
-        '<input autocomplete="off" id="correo" class="swal2-input"><br>' +
-
-        '<label>Contraseña:</label>' +
-        '<input autocomplete="off" type="password" id="password" class="swal2-input">',
-      focusConfirm: false,
-      preConfirm: () => {
-        return [];
-      }
-    });
-    if (formValues) {
-      let email = document.getElementById('email')
-      let password = document.getElementById('password')
-      this.afs.collection('Users').doc(id.getTime().toString()).set({
-        nombre: (document.getElementById('nombre') as HTMLInputElement).value,
-        apellido: (document.getElementById('apellido') as HTMLInputElement).value,
-        email: (document.getElementById('correo') as HTMLInputElement).value,
+  registrar() {
+    console.log("registro");
+    this.auth.nuevoUsuario(this.usuario).then(cred => {
+      console.log(cred)
+      this.firestore.collection('Users').doc(cred.user.uid).set({
+        nombre: this.usuario.nombre,
+        apellido: this.usuario.apellido,
+        email: this.usuario.email,
+        nombreCompleto: `${this.usuario.nombre} ${this.usuario.apellido}`,
         tipoUsuario: Roles.Admin,
       });
-    }
-  } */
+    })
+    this.toastr.success('Se registro un nuevo usuario exitosamente.', 'Usuarios', {
+      timeOut: 3000,
+      progressBar: true,
+      progressAnimation: 'decreasing'
+    });
+    this.showModal = !this.showModal;
+
+  }
 
 }
