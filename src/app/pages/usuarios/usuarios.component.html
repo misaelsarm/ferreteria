@@ -6,7 +6,7 @@
                 <span class="sr-only">Loading...</span>
             </div>
             <button (click)="nuevoUsuario()" class="m-3 btn btn-primary">Registrar nuevo usuario</button>
-            <input placeholder="Buscar usuario" class="m-3" type="text">
+            <!-- <input placeholder="Buscar usuario" class="m-3" type="text"> -->
         </div>
     </div>
     <div style="background-color: white;">
@@ -16,7 +16,6 @@
                 <th>Apellido</th>
                 <th>Email</th>
                 <th>Tipo de usuario</th>
-                <th>Acciones</th>
             </thead>
             <tbody>
                 <tr *ngFor="let usuario of usuarios">
@@ -24,14 +23,14 @@
                     <td>{{usuario.apellido}}</td>
                     <td>{{usuario.email}}</td>
                     <td>{{usuario.tipoUsuario}}</td>
-                    <td class="acciones">
+                    <!-- <td class="acciones">
                         <div (click)="verUsuario(usuario)">
                             <span class="icono mdi mdi-pencil"></span>
                         </div>
                         <div>
                             <span class="icono delete mdi mdi-trash-can"></span>
                         </div>
-                    </td>
+                    </td> -->
                 </tr>
             </tbody>
         </table>

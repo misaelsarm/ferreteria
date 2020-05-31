@@ -1,8 +1,7 @@
-.grid {
-    display: grid;
-    grid-template-columns: 500px 500px;
-    grid-gap: 30px;
-    justify-content: space-between;
+.dashboard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     .pedidos,
     .productos,
     .clientes,
@@ -11,6 +10,8 @@
         padding: 30px;
         border-radius: 10px;
         color: white;
+        margin: 20px;
+        width: 45%;
         h2{
             font-size: 40px;
         }

@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-inventario',
@@ -17,24 +18,54 @@ export class InventarioComponent implements OnInit {
   showModal = false;
   accion = '';
   productos = [];
+  resultados = [];
   producto = new Producto();
   fileData = {
     file: '',
     fileName: ''
   };
   uploadPercent: Observable<number>;
-  constructor(private storage: AngularFireStorage, private ferreteriaService: FerreteriaService, private toastr: ToastrService) { }
+
+  _listFilter: string;
+
+  get listFilter(): string {
+    return this._listFilter;
+  }
+
+  set listFilter(value: string) {
+    this._listFilter = value;
+    this.resultados = this.listFilter ? this.buscar(this.listFilter) : this.productos;
+  }
+
+  constructor(
+    private storage: AngularFireStorage,
+    private ferreteriaService: FerreteriaService,
+    private toastr: ToastrService
+  ) { }
 
   ngOnInit(): void {
     this.ferreteriaService.obtenerProductos().subscribe(items => {
       this.productos = items;
-      console.log(this.productos);
+      this.resultados = this.productos;
     });
+  }
+
+  buscar(elementoBuscado: string): Producto[] {
+    elementoBuscado = elementoBuscado.toLowerCase();
+    return this.productos.filter((producto: Producto) =>
+      producto.nombre.toLowerCase().indexOf(elementoBuscado) !== -1);
   }
 
   nuevoProducto() {
     this.showModal = !this.showModal;
     this.accion = 'Registrar nuevo';
+  }
+
+  submitForm(form: NgForm) {
+    if (form.invalid) {
+      return;
+    }
+    this.registrarProducto();
   }
 
   registrarProducto() {
@@ -45,16 +76,14 @@ export class InventarioComponent implements OnInit {
       enExistenciaDisponibles: this.producto.enExistenciaDisponibles,
       precio: this.producto.precio,
       imagenURL: this.producto.imagenURL,
-    }
+    };
     this.ferreteriaService.registrarProducto(this.producto);
-    console.log(this.producto);
     this.toastr.success('Se registro un nuevo producto exitosamente.', 'Inventario', {
       timeOut: 3000,
       progressBar: true,
       progressAnimation: 'decreasing'
     });
     this.showModal = !this.showModal;
-
   }
 
   onFileSelected(event?) {
@@ -75,7 +104,8 @@ export class InventarioComponent implements OnInit {
       )).subscribe();
   }
 
-  cancelar() {
+  cancelar(form: NgForm) {
+    form.reset();
     this.showModal = !this.showModal;
   }
 }

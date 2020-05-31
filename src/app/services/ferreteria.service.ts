@@ -16,10 +16,14 @@ export class FerreteriaService {
   usersCollection: AngularFirestoreCollection<any>;
   users: Observable<any>;
 
+  ordersCollection: AngularFirestoreCollection<any>;
+  orders: Observable<any>;
+
 
   constructor(private angularFirestore: AngularFirestore) {
     this.getProductsCollection();
     this.getUsersCollection();
+    this.getOrdersCollection();
   }
 
   registrarProducto(producto: Producto) {
@@ -33,6 +37,10 @@ export class FerreteriaService {
 
   obtenerUsuarios() {
     return this.users;
+  }
+
+  obtenerOrdenes() {
+    return this.orders;
   }
 
   getProductsCollection() {
@@ -50,6 +58,17 @@ export class FerreteriaService {
   getUsersCollection() {
     this.usersCollection = this.angularFirestore.collection('Users');
     this.users = this.usersCollection.snapshotChanges().pipe(map(changes => {
+      return changes.map(a => {
+        const data = a.payload.doc.data() as any;
+        data.id = a.payload.doc.id;
+        return data;
+      });
+    }));
+  }
+
+  getOrdersCollection() {
+    this.ordersCollection = this.angularFirestore.collection('Orders');
+    this.orders = this.ordersCollection.snapshotChanges().pipe(map(changes => {
       return changes.map(a => {
         const data = a.payload.doc.data() as any;
         data.id = a.payload.doc.id;

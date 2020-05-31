@@ -29,11 +29,11 @@ input {
         transition: all 0.3s ease;
         padding: 30px;
         height: auto;
-        width: 900px;
+        width: 70%;
         background: white;
         .fields {
             display: grid;
-            grid-template-columns: auto auto;
+            grid-template-columns: 50% 50%;
             .field {
                 input {
                     width: 100%;

@@ -6,12 +6,12 @@
                 <span class="sr-only">Loading...</span>
             </div>
             <button (click)="nuevoProducto()" class="m-3 btn btn-primary">Registrar nuevo producto</button>
-            <input placeholder="Buscar producto" class="m-3" type="text">
+            <input [(ngModel)]="listFilter" placeholder="Buscar producto" class="m-3" type="text">
         </div>
     </div>
     <div class="flex-contenedor">
         <app-producto-lista class="animate__animated animate__fadeIn" [producto]="producto"
-            *ngFor="let producto of productos">
+            *ngFor="let producto of resultados">
         </app-producto-lista>
     </div>
 </div>
@@ -20,44 +20,63 @@
     class="wrapper">
     <div *ngIf="showModal" class="animate__animated animate__fadeInDown custom-modal">
         <h2>{{accion}} producto</h2>
-        <div class="fields">
-            <div class="field">
-                <label for="">Nombre </label>
-                <br>
-                <input [(ngModel)]="producto.nombre" type="text">
+        <form (ngSubmit)="submitForm(productForm)" #productForm="ngForm">
+
+            <div class="fields">
+                <div class="field">
+                    <label for="">Nombre </label>
+                    <br>
+                    <input required name="nombre" [(ngModel)]="producto.nombre" type="text">
+                    <span *ngIf="productForm.submitted && productForm.controls.nombre.errors" style="color: red;">El
+                        campo
+                        no puede estar vacio</span>
+                </div>
+                <div class="field">
+                    <label for="">Descripcion </label>
+                    <br>
+                    <input required name="descripcion" [(ngModel)]="producto.descripcion" type="text">
+                    <span *ngIf="productForm.submitted && productForm.controls.descripcion.errors"
+                        style="color: red;">El
+                        campo no puede estar vacio</span>
+                </div>
+                <div class="field">
+                    <label for="">Marca </label>
+                    <br>
+                    <input required name="marca" [(ngModel)]="producto.marca" type="text">
+                    <span *ngIf="productForm.submitted && productForm.controls.marca.errors" style="color: red;">El
+                        campo no
+                        puede estar vacio</span>
+                </div>
+                <div class="field">
+                    <label for="">Precio </label>
+                    <br>
+                    <input required name="precio" [(ngModel)]="producto.precio" type="text">
+                    <span *ngIf="productForm.submitted && productForm.controls.precio.errors" style="color: red;">El
+                        campo
+                        no puede estar vacio</span>
+                </div>
+                <div class="field">
+                    <label for="">En existencia </label>
+                    <br>
+                    <input required name="enExistencia" [(ngModel)]="producto.enExistenciaDisponibles" type="text">
+                    <span *ngIf="productForm.submitted && productForm.controls.enExistencia.errors"
+                        style="color: red;">El
+                        campo no puede estar vacio</span>
+                </div>
+                <div class="field field-upload">
+                    <label class="uploadFile" for="uploadFile">Cargar imagen </label>
+                    <span class="mdi mdi-cloud-upload-outline"></span>
+                    <input id="uploadFile" (change)="onFileSelected($event)" type="file">
+                </div>
             </div>
-            <div class="field">
-                <label for="">Descripcion </label>
-                <br>
-                <input [(ngModel)]="producto.descripcion" type="text">
+
+            <div class="d-flex justify-content-end">
+                <button (click)="cancelar(productForm)" style="background: rgb(231, 231, 231); color: #007bff;"
+                    class="m-2 btn">Cancelar</button>
+                <button type="submit" *ngIf="accion==='Registrar nuevo'" class="m-2 btn btn-primary">Registrar</button>
+                <button *ngIf="accion==='Modificar'" class="m-2 btn btn-primary">Actualizar</button>
             </div>
-            <div class="field">
-                <label for="">Marca </label>
-                <br>
-                <input [(ngModel)]="producto.marca" type="text">
-            </div>
-            <div class="field">
-                <label for="">Precio </label>
-                <br>
-                <input [(ngModel)]="producto.precio" type="text">
-            </div>
-            <div class="field">
-                <label for="">En existencia </label>
-                <br>
-                <input [(ngModel)]="producto.enExistenciaDisponibles" type="text">
-            </div>
-            <div class="field field-upload">
-                <label class="uploadFile" for="uploadFile">Cargar imagen </label>
-                <span class="mdi mdi-cloud-upload-outline"></span>
-                <input id="uploadFile" (change)="onFileSelected($event)" type="file">
-            </div>
-        </div>
-        <div class="d-flex justify-content-end">
-            <button (click)="cancelar()" style="background: rgb(231, 231, 231); color: #007bff;"
-                class="m-2 btn">Cancelar</button>
-            <button (click)="registrarProducto()" *ngIf="accion==='Registrar nuevo'"
-                class="m-2 btn btn-primary">Registrar</button>
-            <button *ngIf="accion==='Modificar'" class="m-2 btn btn-primary">Actualizar</button>
-        </div>
+        </form>
+
     </div>
 </div>

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { UsuarioModel } from '../models/usuario.model';
-import { HttpClient } from '@angular/common/http';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 

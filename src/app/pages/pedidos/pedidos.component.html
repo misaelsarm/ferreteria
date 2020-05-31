@@ -1,3 +1,20 @@
 <div class="component">
-    <p>pedidos works!</p>
+    <div *ngIf="usuario==='ReadOnly'">
+        <h2>Mis pedidos</h2>
+        <div class="orden" *ngFor="let orden of misOrdenes">
+            <h3>Numero de pedido: {{orden.id}}</h3>
+            <p>Nombre de cliente: {{orden.nombreCliente}}</p>
+            <p>Estado: {{orden.status}}</p>
+        </div>
+    </div>
+
+    <div *ngIf="usuario==='Admin'">
+        <h2>Pedidos</h2>
+        <div class="orden" *ngFor="let orden of ordenes">
+            <h3>Numero de pedido: {{orden.id}}</h3>
+            <p>Nombre de cliente: {{orden.nombreCliente}}</p>
+            <p>Estado: {{orden.status}}</p>
+        </div>
+    </div>
+
 </div>

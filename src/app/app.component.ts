@@ -10,12 +10,10 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 
 export class AppComponent implements OnInit {
-  loggedIn = true;
   title = 'ferreteria';
   tipoUsuario: string;
 
   constructor(
-    private auth: AuthService,
     private firestore: AngularFirestore,
     private firebaseAuth: AngularFireAuth
   ) {
@@ -27,10 +25,7 @@ export class AppComponent implements OnInit {
         const document = this.firestore.collection('Users').doc(user.uid);
         document.get().subscribe((doc) => {
           this.tipoUsuario = doc.data().tipoUsuario;
-          console.log(doc.data().tipoUsuario);
         });
-      } else {
-        console.log('not logged in');
       }
     });
   }
