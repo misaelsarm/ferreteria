@@ -2,4 +2,14 @@
     background: white;
     padding: 20px;
     margin-bottom: 20px;
+    .mdi {
+        vertical-align: middle;
+        font-size: 40px !important;
+        &.mdi-clock-outline {
+            color: rgb(46, 196, 255);
+        }
+        &.mdi-check {
+            color: rgb(11, 226, 11)
+        }
+    }
 }

@@ -55,7 +55,7 @@ export class HomeComponent implements OnInit {
 
   obtenerClientes(usuarios: UsuarioModel[]) {
     usuarios.forEach(element => {
-      if (element.tipoUsuario === 'ReadOnly') {
+      if (element.tipoUsuario === 'Cliente') {
         this.clientes.push(element);
       }
     });
@@ -63,7 +63,7 @@ export class HomeComponent implements OnInit {
 
   obtenerAdmins(usuarios: UsuarioModel[]) {
     usuarios.forEach(element => {
-      if (element.tipoUsuario === 'Admin') {
+      if (element.tipoUsuario === 'Administrador') {
         this.administradores.push(element);
       }
     });

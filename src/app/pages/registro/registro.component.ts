@@ -26,12 +26,17 @@ export class RegistroComponent {
 
     this.auth.nuevoUsuario(this.usuario).then((cred) => {
       console.log(cred);
+      const date = new Date();
+      const time = `${date.getHours().toString()} : ${date.getMinutes().toString()} : ${date.getSeconds().toString()}`;
+      const day = `${date.getDate().toString()} - ${(date.getMonth() + 1).toString()} - ${date.getFullYear().toString()}`;
       this.afs.collection('Users').doc(cred.user.uid).set({
         nombre: this.usuario.nombre,
         apellido: this.usuario.apellido,
         email: this.usuario.email,
         nombreCompleto: `${this.usuario.nombre} ${this.usuario.apellido}`,
-        tipoUsuario: Roles.ReadOnly,
+        tipoUsuario: Roles.Cliente,
+        fechaCreacion: day,
+        horaCreacion: time
       })
       Swal.fire({
         title: 'Registro exitoso',

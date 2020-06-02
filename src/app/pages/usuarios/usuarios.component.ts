@@ -89,13 +89,18 @@ export class UsuariosComponent implements OnInit {
 
   registrar() {
     this.auth.nuevoUsuario(this.usuario).then(cred => {
+      const date = new Date();
+      const time = `${date.getHours().toString()} : ${date.getMinutes().toString()} : ${date.getSeconds().toString()}`;
+      const day = `${date.getDate().toString()} - ${(date.getMonth() + 1).toString()} - ${date.getFullYear().toString()}`;
       console.log(cred)
       this.firestore.collection('Users').doc(cred.user.uid).set({
         nombre: this.usuario.nombre,
         apellido: this.usuario.apellido,
         email: this.usuario.email,
         nombreCompleto: `${this.usuario.nombre} ${this.usuario.apellido}`,
-        tipoUsuario: Roles.Admin,
+        tipoUsuario: Roles.Administrador,
+        fechaCreacion: day,
+        horaCreacion: time
       });
       this.toastr.success('Se registro un nuevo usuario exitosamente.', 'Usuarios', {
         timeOut: 3000,

@@ -1,32 +1,38 @@
 <div class="component">
-    <div *ngIf="usuario==='ReadOnly'">
-        <h2>Mis pedidos</h2>
-        <div *ngIf="!misPedidos.length" class="d-flex">
-            <h2 class="mb-4">Inicio</h2>
-            <div style="margin-left: 30px;" class="spinner-border text-primary" role="status">
+    <div *ngIf="usuario==='Cliente'">
+        <div class="d-flex">
+            <h2>Mis pedidos</h2>
+            <div *ngIf="!misPedidos.length" style="margin-left: 30px;" class="spinner-border text-primary"
+                role="status">
                 <span class="sr-only">Loading...</span>
             </div>
         </div>
         <div class="pedido" *ngFor="let pedido of misPedidos">
-            <h3>Numero de pedido: {{pedido.id}}</h3>
-            <p>Nombre de cliente: {{pedido.nombreCliente}}</p>
-            <p>Estado: {{pedido.status}}</p>
-        </div>
-    </div>
-
-    <div *ngIf="usuario==='Admin'">
-        <div class="d-flex">
-            <h2 class="mb-4">Pedidos</h2>
-            <div *ngIf="!pedidos.length" style="margin-left: 30px;" class="spinner-border text-primary" role="status">
-                <span class="sr-only">Loading...</span>
+            <div class="d-flex justify-content-between">
+                <div>
+                    <h3>Numero de pedido: {{pedido.id}}</h3>
+                    <p>Nombre de cliente: {{pedido.nombreCliente}}</p>
+                    <p>Fecha de pedido: {{pedido.diaPedido}}</p>
+                    <p>Hora de pedido: {{pedido.horaPedido}}</p>
+                </div>
+                <div>
+                    <h4 class="mb-5">Estado: {{pedido.status}}
+                        <span *ngIf="pedido.status === 'Pendiente'" class="mdi mdi-clock-outline"></span>
+                        <span *ngIf="pedido.status === 'Entregado'" class="mdi mdi-check"></span>
+                    </h4>
+                    <h4>Total: {{pedido.total | currency}}</h4>
+                </div>
             </div>
-        </div>
-        <div class="pedido" *ngFor="let pedido of pedidos">
-            <h3>Numero de pedido: {{pedido.id}}</h3>
-            <p>Nombre de cliente: {{pedido.nombreCliente}}</p>
-            <p>Estado: {{pedido.status}}</p>
             <div>
-                <h3>Productos pedidos</h3>
+                <div class="d-flex justify-content-between">
+                    <div class="d-flex">
+                        <h3>Productos pedidos</h3>
+                        <div *ngIf="!pedido.productos" style="margin-left: 30px;" class="spinner-border text-primary"
+                            role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                </div>
                 <ul *ngFor="let producto of pedido.productos">
                     <li> {{producto.nombre}}</li>
                 </ul>
@@ -34,4 +40,48 @@
         </div>
     </div>
 
+
+    <div *ngIf="usuario==='Administrador'">
+        <div class="d-flex">
+            <h2 class="mb-4">Pedidos</h2>
+            <div *ngIf="!pedidos.length" style="margin-left: 30px;" class="spinner-border text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <div class="pedido" *ngFor="let pedido of pedidos">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <h3>Numero de pedido: {{pedido.id}}</h3>
+                    <p>Nombre de cliente: {{pedido.nombreCliente}}</p>
+                    <p>Fecha de pedido: {{pedido.diaPedido}}</p>
+                    <p>Hora de pedido: {{pedido.horaPedido}}</p>
+                </div>
+                <div>
+                    <h4 class="mb-5">Estado: {{pedido.status}}
+                        <span *ngIf="pedido.status === 'Pendiente'" class="mdi mdi-clock-outline"></span>
+                        <span *ngIf="pedido.status === 'Entregado'" class="mdi mdi-check"></span>
+                    </h4>
+                    <h4>Total: {{pedido.total | currency}}</h4>
+                </div>
+            </div>
+            <div>
+                <div class="d-flex justify-content-between">
+                    <div class="d-flex">
+                        <h3>Productos pedidos</h3>
+                        <div *ngIf="!pedido.productos" style="margin-left: 30px;" class="spinner-border text-primary"
+                            role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                    <button (click)="confirmar(pedido)" *ngIf="pedido.status === 'Pendiente'"
+                        class="btn btn-success">Confirmar entrega de
+                        pedido</button>
+                </div>
+                <ul *ngFor="let producto of pedido.productos">
+                    <li> {{producto.nombre}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
+

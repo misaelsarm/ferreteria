@@ -2,15 +2,15 @@
     <div class="nav-items">
         <a [routerLink]="['/inicio']" routerLinkActive="active-component"> <span class="mdi mdi-home-outline"></span> Inicio</a>
 
-        <a *ngIf="tipoUsuario==='ReadOnly'" [routerLink]="['/pedidos']" routerLinkActive="active-component"><span class="mdi mdi-calendar-edit"></span> Mis Pedidos</a>
+        <a *ngIf="tipoUsuario==='Cliente'" [routerLink]="['/pedidos']" routerLinkActive="active-component"><span class="mdi mdi-calendar-edit"></span> Mis Pedidos</a>
 
-        <a *ngIf="tipoUsuario==='ReadOnly'" [routerLink]="['/catalogo']" routerLinkActive="active-component"><span class="mdi mdi-view-grid-plus-outline"></span> Catalogo</a>
+        <a *ngIf="tipoUsuario==='Cliente'" [routerLink]="['/catalogo']" routerLinkActive="active-component"><span class="mdi mdi-view-grid-plus-outline"></span> Catalogo</a>
 
-        <a *ngIf="tipoUsuario==='Admin'" [routerLink]="['/inventario']" routerLinkActive="active-component"><span class="mdi mdi-clipboard-check-multiple-outline"></span> Inventario</a>
+        <a *ngIf="tipoUsuario==='Administrador'" [routerLink]="['/inventario']" routerLinkActive="active-component"><span class="mdi mdi-clipboard-check-multiple-outline"></span> Inventario</a>
 
-        <a *ngIf="tipoUsuario==='Admin'" [routerLink]="['/pedidos']" routerLinkActive="active-component"><span class="mdi mdi-calendar-edit"></span> Pedidos</a>
+        <a *ngIf="tipoUsuario==='Administrador'" [routerLink]="['/pedidos']" routerLinkActive="active-component"><span class="mdi mdi-calendar-edit"></span> Pedidos</a>
 
-        <a *ngIf="tipoUsuario==='Admin'" [routerLink]="['/usuarios']" routerLinkActive="active-component"><span class="mdi mdi-account-group"></span> Usuarios</a>
+        <a *ngIf="tipoUsuario==='Administrador'" [routerLink]="['/usuarios']" routerLinkActive="active-component"><span class="mdi mdi-account-group"></span> Usuarios</a>
 
         <a style="position: absolute; bottom: 0;" (click)="logOut()" routerLinkActive="router-link-active"><span class="mdi mdi-logout-variant mdi-rotate-180"></span> Cerrar sesión</a>
     </div>
