@@ -9,46 +9,34 @@ import { AngularFireAuth } from '@angular/fire/auth';
   styleUrls: ['./pedidos.component.scss']
 })
 export class PedidosComponent implements OnInit {
-  ordenes = [];
-  misOrdenes = []
-  productosOrdenados = [];
-  public cliente = '';
-  tipoUsuario: string
+  pedidos = [];
+  misPedidos = [];
+  tipoUsuario: string;
   usuario: string;
 
   constructor(private ferreteriaService: FerreteriaService, private firebaseAuth: AngularFireAuth, private firestore: AngularFirestore) {
-
-    this.ferreteriaService.obtenerOrdenes().subscribe(ordenes => {
+    this.ferreteriaService.obtenerPedidos().subscribe(pedidos => {
       this.firebaseAuth.onAuthStateChanged((user) => {
         if (user) {
           const document = this.firestore.collection('Users').doc(user.uid);
           document.get().subscribe((doc) => {
-            this.ordenes = ordenes;
-            console.log(ordenes)
-            console.log(doc.data().tipoUsuario);
-            const idCliente = user.uid;
-            this.misOrdenes = this.ordenes.filter((element) => {
+            this.pedidos = pedidos;
+            this.misPedidos = this.pedidos.filter((element) => {
               return element.idCliente === user.uid;
-            })
-            //console.log(this.misOrdenes);
+            });
+            this.pedidos.forEach((orden, index) => {
+              let data = []
+              this.firestore.collection('Pedidos').doc(orden.id).collection('Products').get().toPromise().then(snapshot => {
+                this.pedidos[index]['productos'] = data;
+                snapshot.forEach((el) => {
+                  data.push(el.data());
+                });
+              });
+            });
+            console.log(this.pedidos);
           });
         }
       });
-      //console.log(this.cliente);
-      //console.log(this.misOrdenes);
-      /*  this.ordenes.forEach(async (orden: any, index) => {
-         this.firestore
-           .collection('Orders')
-           .doc(orden.id)
-           .collection('Products')
-           .get().subscribe((doc) => {
-             doc.forEach(((document) => {
-               console.log(document.id);
-               this.productosOrdenados.splice(index, 0, document.id)
-             }))
-             console.log(this.productosOrdenados);
-           })
-       }); */
     });
   }
 

@@ -10,7 +10,6 @@ export class AuthService {
 
   usuario: UsuarioModel = new UsuarioModel();
 
-  tipoUsuario: 'string';
 
   constructor(private firebaseAuth: AngularFireAuth, private firestore: AngularFirestore) {
   }
@@ -33,6 +32,10 @@ export class AuthService {
 
     const cred = await this.firebaseAuth.createUserWithEmailAndPassword(authData.email, authData.password);
     return cred;
+  }
+
+  currentUser() {
+    return this.firebaseAuth.user;
   }
 }
 

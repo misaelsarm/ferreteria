@@ -33,6 +33,16 @@ nav {
     }
 }
 
+.top-bar{
+    position: absolute;
+    width: calc(100% - 280px);
+    left: 280px;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 60px;
+    padding-top: 25px;
+}
+
 .mdi {
     font-size: 30px !important;
 }

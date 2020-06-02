@@ -15,12 +15,13 @@ export class AppComponent implements OnInit {
 
   constructor(
     private firestore: AngularFirestore,
-    private firebaseAuth: AngularFireAuth
+    private firebaseAuth: AngularFireAuth,
+    private authService: AuthService
   ) {
 
   }
   ngOnInit(): void {
-    this.firebaseAuth.onAuthStateChanged((user) => {
+    this.authService.currentUser().subscribe((user) => {
       if (user) {
         const document = this.firestore.collection('Users').doc(user.uid);
         document.get().subscribe((doc) => {

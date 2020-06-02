@@ -1,19 +1,36 @@
 <div class="component">
     <div *ngIf="usuario==='ReadOnly'">
         <h2>Mis pedidos</h2>
-        <div class="orden" *ngFor="let orden of misOrdenes">
-            <h3>Numero de pedido: {{orden.id}}</h3>
-            <p>Nombre de cliente: {{orden.nombreCliente}}</p>
-            <p>Estado: {{orden.status}}</p>
+        <div *ngIf="!misPedidos.length" class="d-flex">
+            <h2 class="mb-4">Inicio</h2>
+            <div style="margin-left: 30px;" class="spinner-border text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <div class="pedido" *ngFor="let pedido of misPedidos">
+            <h3>Numero de pedido: {{pedido.id}}</h3>
+            <p>Nombre de cliente: {{pedido.nombreCliente}}</p>
+            <p>Estado: {{pedido.status}}</p>
         </div>
     </div>
 
     <div *ngIf="usuario==='Admin'">
-        <h2>Pedidos</h2>
-        <div class="orden" *ngFor="let orden of ordenes">
-            <h3>Numero de pedido: {{orden.id}}</h3>
-            <p>Nombre de cliente: {{orden.nombreCliente}}</p>
-            <p>Estado: {{orden.status}}</p>
+        <div class="d-flex">
+            <h2 class="mb-4">Pedidos</h2>
+            <div *ngIf="!pedidos.length" style="margin-left: 30px;" class="spinner-border text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <div class="pedido" *ngFor="let pedido of pedidos">
+            <h3>Numero de pedido: {{pedido.id}}</h3>
+            <p>Nombre de cliente: {{pedido.nombreCliente}}</p>
+            <p>Estado: {{pedido.status}}</p>
+            <div>
+                <h3>Productos pedidos</h3>
+                <ul *ngFor="let producto of pedido.productos">
+                    <li> {{producto.nombre}}</li>
+                </ul>
+            </div>
         </div>
     </div>
 

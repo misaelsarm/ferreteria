@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,23 +9,25 @@ import { AngularFirestore } from '@angular/fire/firestore';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+
   tipoUsuario: string;
+  usuarioActual: string;
 
   constructor(
     private firebaseAuth: AngularFireAuth,
-    private firestore: AngularFirestore
+    private firestore: AngularFirestore,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
-    this.firebaseAuth.onAuthStateChanged((user) => {
+    this.authService.currentUser().subscribe((user) => {
+      console.log(user);
       if (user) {
         const document = this.firestore.collection('Users').doc(user.uid);
         document.get().subscribe((doc) => {
           this.tipoUsuario = doc.data().tipoUsuario;
-          console.log(doc.data().tipoUsuario);
+          this.usuarioActual = doc.data().nombreCompleto;
         });
-      } else {
-        console.log('not logged in');
       }
     });
   }

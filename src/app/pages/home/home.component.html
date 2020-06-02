@@ -1,9 +1,15 @@
 <div class="component">
-    <h2 class="mb-4">Home</h2>
-    <div *ngIf="usuario==='Admin'" class="dashboard">
+    <div class="d-flex">
+        <h2 class="mb-4">Inicio</h2>
+        <div style="margin-left: 30px;" *ngIf="!this.pedidos.length || !this.productos.length || !this.clientes.length || !this.administradores.length"
+            class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <div *ngIf="tipoUsuario==='Admin'" class="dashboard">
         <div class="pedidos">
             <h2>Pedidos</h2>
-            <h4>{{ordenes.length}}</h4>
+            <h4>{{pedidos.length}}</h4>
         </div>
         <div class="productos">
             <h2>Productos</h2>
@@ -19,10 +25,10 @@
         </div>
     </div>
 
-    <div *ngIf="usuario==='ReadOnly'" class="grid">
+    <div *ngIf="tipoUsuario==='ReadOnly'" class="grid">
         <div class="pedidos">
             <h2>Mis pedidos</h2>
-            <h4>{{misOrdenes.length}}</h4>
+            <h4>{{misPedidos.length}}</h4>
         </div>
     </div>
 </div>

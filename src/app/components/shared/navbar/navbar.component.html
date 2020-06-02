@@ -1,6 +1,5 @@
 <nav class="nav">
     <div class="nav-items">
-
         <a [routerLink]="['/inicio']" routerLinkActive="active-component"> <span class="mdi mdi-home-outline"></span> Inicio</a>
 
         <a *ngIf="tipoUsuario==='ReadOnly'" [routerLink]="['/pedidos']" routerLinkActive="active-component"><span class="mdi mdi-calendar-edit"></span> Mis Pedidos</a>
@@ -15,4 +14,10 @@
 
         <a style="position: absolute; bottom: 0;" (click)="logOut()" routerLinkActive="router-link-active"><span class="mdi mdi-logout-variant mdi-rotate-180"></span> Cerrar sesión</a>
     </div>
+    
 </nav>
+<div class="top-bar">
+    <h4>{{usuarioActual}}</h4>
+</div>
+
+

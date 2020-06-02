@@ -57,8 +57,8 @@ export class CatalogoComponent implements OnInit {
   confirmarPedido() {
     const id = new Date();
     this.orden.productosOrdenados.forEach((producto) => {
-      this.firestore.collection('Orders').doc(id.getTime().toString()).collection('Products').add(producto);
-      this.firestore.collection('Orders').doc(id.getTime().toString()).set({
+      this.firestore.collection('Pedidos').doc(id.getTime().toString()).collection('Products').add(producto);
+      this.firestore.collection('Pedidos').doc(id.getTime().toString()).set({
         status: 'Pendiente',
         total: this.orden.total,
         nombreCliente: this.orden.nombreCliente,
