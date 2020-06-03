@@ -6,6 +6,9 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { NgForm } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
+import { AngularFirestore } from '@angular/fire/firestore';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-inventario',
@@ -19,6 +22,7 @@ export class InventarioComponent implements OnInit {
   accion = '';
   productos = [];
   resultados = [];
+  tipoUsuario: string;
   producto = new Producto();
   fileData = {
     file: '',
@@ -40,13 +44,24 @@ export class InventarioComponent implements OnInit {
   constructor(
     private storage: AngularFireStorage,
     private ferreteriaService: FerreteriaService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private authService: AuthService,
+    private firestore: AngularFirestore
   ) { }
 
   ngOnInit(): void {
+    this.authService.currentUser().subscribe((user) => {
+      if (user) {
+        const document = this.firestore.collection('Users').doc(user.uid);
+        document.get().subscribe((doc) => {
+          this.tipoUsuario = doc.data().tipoUsuario;
+        });
+      }
+    });
     this.ferreteriaService.obtenerProductos().subscribe(items => {
       this.productos = items;
       this.resultados = this.productos;
+      console.log(this.resultados);
     });
   }
 
@@ -75,7 +90,7 @@ export class InventarioComponent implements OnInit {
       marca: this.producto.marca,
       enExistenciaDisponibles: this.producto.enExistenciaDisponibles,
       precio: this.producto.precio,
-      imagenURL: this.producto.imagenURL,
+      imagenURL: this.producto.imagenURL
     };
     this.ferreteriaService.registrarProducto(this.producto);
     this.toastr.success('Se registro un nuevo producto exitosamente.', 'Inventario', {
@@ -86,7 +101,18 @@ export class InventarioComponent implements OnInit {
     this.showModal = !this.showModal;
   }
 
-  onFileSelected(event?) {
+  verProducto(producto: Producto) {
+    this.accion = 'Actualizar';
+    this.showModal = !this.showModal;
+    this.producto.nombre = producto.nombre;
+    this.producto.precio = producto.precio;
+    this.producto.marca = producto.marca;
+    this.producto.descripcion = producto.descripcion;
+    this.producto.enExistenciaDisponibles = producto.enExistenciaDisponibles;
+    this.producto.id = producto.id;
+  }
+
+  onFileSelected(event) {
     this.fileData.file = event.target.files[0];
     this.fileData.fileName = event.target.files[0].name;
     const filePath = `productos/${this.fileData.fileName}`;
@@ -107,5 +133,51 @@ export class InventarioComponent implements OnInit {
   cancelar(form: NgForm) {
     form.reset();
     this.showModal = !this.showModal;
+  }
+
+  confirmarActualizacion() {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'm-3 btn btn-success',
+        cancelButton: 'btn btn-outline-danger'
+      },
+      buttonsStyling: false
+    })
+    swalWithBootstrapButtons.fire({
+      title: '¿Actualizar datos de producto?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#28a745',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Confirmar',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.value) {
+        this.firestore.collection('Products').doc((this.producto.id).toString()).update({
+          nombre: this.producto.nombre,
+          precio: this.producto.precio,
+          marca: this.producto.marca,
+          descripcion: this.producto.descripcion,
+          enExistenciaDisponibles: this.producto.enExistenciaDisponibles,
+        }).then(() => {
+          this.toastr.success('Se actualizaron los datos del producto.', 'Producto actualizado', {
+            timeOut: 3000,
+            progressBar: true,
+            progressAnimation: 'decreasing'
+          });
+          this.showModal = !this.showModal;
+        })
+
+      }
+      else if (result.dismiss === Swal.DismissReason.cancel) {
+        this.toastr.error('Operacion cancelada', '', {
+          timeOut: 3000,
+          progressBar: true,
+          progressAnimation: 'decreasing'
+        });
+        this.showModal = !this.showModal;
+      }
+    })
   }
 }

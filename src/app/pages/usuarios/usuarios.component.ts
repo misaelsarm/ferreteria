@@ -48,7 +48,7 @@ export class UsuariosComponent implements OnInit {
   buscar(elementoBuscado: string): UsuarioModel[] {
     elementoBuscado = elementoBuscado.toLowerCase();
     return this.usuarios.filter((usuario: UsuarioModel) =>
-      usuario.nombre.toLowerCase().indexOf(elementoBuscado) !== -1);
+      usuario.nombreCompleto.toLowerCase().indexOf(elementoBuscado) !== -1);
   }
 
   /**
@@ -99,8 +99,8 @@ export class UsuariosComponent implements OnInit {
         email: this.usuario.email,
         nombreCompleto: `${this.usuario.nombre} ${this.usuario.apellido}`,
         tipoUsuario: Roles.Administrador,
-        fechaCreacion: day,
-        horaCreacion: time
+        fechaRegistro: day,
+        horaRegistro: time
       });
       this.toastr.success('Se registro un nuevo usuario exitosamente.', 'Usuarios', {
         timeOut: 3000,

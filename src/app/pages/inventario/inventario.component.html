@@ -10,8 +10,8 @@
         </div>
     </div>
     <div class="flex-contenedor">
-        <app-producto-lista class="animate__animated animate__fadeIn" [producto]="producto"
-            *ngFor="let producto of resultados">
+        <app-producto-lista (verProducto)="verProducto($event)" [tipoUsuario]="tipoUsuario"
+            class="animate__animated animate__fadeIn" [producto]="producto" *ngFor="let producto of resultados">
         </app-producto-lista>
     </div>
 </div>
@@ -62,7 +62,7 @@
                         style="color: red;">El
                         campo no puede estar vacio</span>
                 </div>
-                <div class="field field-upload">
+                <div *ngIf="accion==='Registrar nuevo'" class="field field-upload">
                     <label class="uploadFile" for="uploadFile">Cargar imagen </label>
                     <span class="mdi mdi-cloud-upload-outline"></span>
                     <input id="uploadFile" (change)="onFileSelected($event)" type="file">
@@ -70,12 +70,17 @@
             </div>
 
             <div class="d-flex justify-content-end">
-                <button (click)="cancelar(productForm)" style="background: rgb(231, 231, 231); color: #007bff;"
-                    class="m-2 btn">Cancelar</button>
+                <button (click)="cancelar(productForm)" *ngIf="accion==='Registrar nuevo'"
+                    style="background: rgb(231, 231, 231); color: #007bff;" class="m-2 btn">Cancelar</button>
                 <button type="submit" *ngIf="accion==='Registrar nuevo'" class="m-2 btn btn-primary">Registrar</button>
-                <button *ngIf="accion==='Modificar'" class="m-2 btn btn-primary">Actualizar</button>
             </div>
         </form>
+        <div class="d-flex justify-content-end">
+            <button (click)="cancelar(productForm)" *ngIf="accion==='Actualizar'" class="m-2 btn"
+                style="background: rgb(231, 231, 231); color: #007bff;">Cancelar</button>
+            <button (click)="confirmarActualizacion()" *ngIf="accion==='Actualizar'"
+                class="m-2 btn btn-primary">Actualizar</button>
+        </div>
 
     </div>
 </div>

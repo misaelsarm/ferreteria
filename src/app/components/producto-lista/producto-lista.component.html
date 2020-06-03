@@ -3,8 +3,11 @@
     <h4> {{producto.precio | currency}} </h4>
     <p>{{producto.descripcion}}</p>
     <p>{{producto.marca}}</p>
+    <p>{{producto.id}}</p>
     <div class="thumbnail">
         <img style="width: 100%; height: 100%;" [src]="producto.imagenURL" alt="">
     </div>
-    <button class="mt-4 btn btn-primary btn-block">Ordenar</button>
+    <button *ngIf="tipoUsuario==='Cliente'" class="mt-4 btn btn-primary btn-block">Ordenar</button>
+    <button (click)="ver(producto)" *ngIf="tipoUsuario==='Administrador'"
+        class="mt-4 btn btn-primary btn-block">Actualizar datos de producto</button>
 </div>

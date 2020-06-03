@@ -12,25 +12,19 @@
     <div style="background-color: white;">
         <table class="table">
             <thead>
-                <th>Nombre</th>
-                <th>Apellido</th>
+                <th>Nombre completo</th>
                 <th>Email</th>
+                <th>Fecha de registro</th>
+                <th>Hora de registro</th>
                 <th>Tipo de usuario</th>
             </thead>
             <tbody>
                 <tr *ngFor="let usuario of resultados">
-                    <td>{{usuario.nombre}}</td>
-                    <td>{{usuario.apellido}}</td>
+                    <td>{{usuario.nombreCompleto}}</td>
                     <td>{{usuario.email}}</td>
+                    <td>{{usuario.fechaRegistro}}</td>
+                    <td>{{usuario.horaRegistro}}</td>
                     <td>{{usuario.tipoUsuario}}</td>
-                    <!-- <td class="acciones">
-                        <div (click)="verUsuario(usuario)">
-                            <span class="icono mdi mdi-pencil"></span>
-                        </div>
-                        <div>
-                            <span class="icono delete mdi mdi-trash-can"></span>
-                        </div>
-                    </td> -->
                 </tr>
             </tbody>
         </table>

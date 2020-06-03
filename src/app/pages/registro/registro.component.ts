@@ -35,8 +35,8 @@ export class RegistroComponent {
         email: this.usuario.email,
         nombreCompleto: `${this.usuario.nombre} ${this.usuario.apellido}`,
         tipoUsuario: Roles.Cliente,
-        fechaCreacion: day,
-        horaCreacion: time
+        fechaRegistro: day,
+        horaRegistro: time
       })
       Swal.fire({
         title: 'Registro exitoso',

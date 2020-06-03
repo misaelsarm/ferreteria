@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ToastrService } from 'ngx-toastr';
 import { Producto } from 'src/app/models/producto.model';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-catalogo',
@@ -16,6 +17,8 @@ export class CatalogoComponent implements OnInit {
 
   productos = [];
 
+  tipoUsuario: string
+
   orden = {
     productosOrdenados: [],
     total: 0,
@@ -27,23 +30,23 @@ export class CatalogoComponent implements OnInit {
     private firebaseAuth: AngularFireAuth,
     private firestore: AngularFirestore,
     private ferreteriaService: FerreteriaService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
+    this.authService.currentUser().subscribe((user) => {
+      if (user) {
+        const document = this.firestore.collection('Users').doc(user.uid);
+        document.get().subscribe((doc) => {
+          this.tipoUsuario = doc.data().tipoUsuario;
+          this.orden.nombreCliente = doc.data().nombreCompleto;
+          this.orden.idCliente = user.uid;
+        });
+      }
+    });
     this.ferreteriaService.obtenerProductos().subscribe(items => {
       this.productos = items;
-      console.log(this.productos);
-      this.firebaseAuth.onAuthStateChanged((user) => {
-        if (user) {
-          const document = this.firestore.collection('Users').doc(user.uid);
-          document.get().subscribe((doc) => {
-            this.orden.nombreCliente = doc.data().nombreCompleto;
-            this.orden.idCliente = user.uid;
-            console.log(this.orden.nombreCliente);
-          });
-        }
-      });
     });
   }
 

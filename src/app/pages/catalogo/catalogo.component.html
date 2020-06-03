@@ -10,7 +10,7 @@
         </div>
     </div>
     <div class="flex-contenedor">
-        <app-producto-lista (click)="ordernar(producto)" class="animate__animated animate__fadeIn" [producto]="producto"
+        <app-producto-lista [tipoUsuario]="tipoUsuario" (click)="ordernar(producto)" class="animate__animated animate__fadeIn" [producto]="producto"
             *ngFor="let producto of productos">
         </app-producto-lista>
     </div>

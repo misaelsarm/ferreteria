@@ -44,7 +44,6 @@ export class FerreteriaService {
   }
 
   getProductsCollection() {
-
     this.productsCollection = this.angularFirestore.collection('Products');
     this.products = this.productsCollection.snapshotChanges().pipe(map(changes => {
       return changes.map(a => {
