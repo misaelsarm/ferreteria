@@ -38,7 +38,7 @@ export class InventarioComponent implements OnInit {
 
   set listFilter(value: string) {
     this._listFilter = value;
-    this.resultados = this.listFilter ? this.buscar(this.listFilter) : this.productos;
+    this.productos = this.listFilter ? this.buscar(this.listFilter) : this.resultados;
   }
 
   constructor(
@@ -59,9 +59,9 @@ export class InventarioComponent implements OnInit {
       }
     });
     this.ferreteriaService.obtenerProductos().subscribe(items => {
-      this.productos = items;
-      this.resultados = this.productos;
-      console.log(this.resultados);
+      this.resultados = items;
+      this.productos = this.resultados;
+      //console.log(this.resultados);
     });
   }
 
@@ -142,7 +142,7 @@ export class InventarioComponent implements OnInit {
         cancelButton: 'btn btn-outline-danger'
       },
       buttonsStyling: false
-    })
+    });
     swalWithBootstrapButtons.fire({
       title: '¿Actualizar datos de producto?',
       icon: 'warning',
@@ -167,7 +167,7 @@ export class InventarioComponent implements OnInit {
             progressAnimation: 'decreasing'
           });
           this.showModal = !this.showModal;
-        })
+        });
 
       }
       else if (result.dismiss === Swal.DismissReason.cancel) {
@@ -176,8 +176,7 @@ export class InventarioComponent implements OnInit {
           progressBar: true,
           progressAnimation: 'decreasing'
         });
-        this.showModal = !this.showModal;
       }
-    })
+    });
   }
 }

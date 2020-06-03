@@ -1,10 +1,15 @@
 <div class="component">
-    <div *ngIf="usuario==='Cliente'">
-        <div class="d-flex">
-            <h2>Mis pedidos</h2>
-            <div *ngIf="!misPedidos.length" style="margin-left: 30px;" class="spinner-border text-primary"
-                role="status">
-                <span class="sr-only">Loading...</span>
+    <div *ngIf="tipoUsuario==='Cliente'">
+        <div class="mb-3 d-flex justify-content-between">
+            <div class="d-flex">
+                <h2>Mis Pedidos</h2>
+                <div style="margin-left: 30px;" *ngIf="!misPedidos.length" style="margin-left: 30px;"
+                    class="spinner-border text-primary" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+            <div>
+                <input [(ngModel)]="listFilter" placeholder="Buscar producto" type="text">
             </div>
         </div>
         <div class="pedido" *ngFor="let pedido of misPedidos">
@@ -19,6 +24,7 @@
                     <h4 class="mb-5">Estado: {{pedido.status}}
                         <span *ngIf="pedido.status === 'Pendiente'" class="mdi mdi-clock-outline"></span>
                         <span *ngIf="pedido.status === 'Entregado'" class="mdi mdi-check"></span>
+                        <span *ngIf="pedido.status === 'Cancelado'" class="mdi mdi-close"></span>
                     </h4>
                     <h4>Total: {{pedido.total | currency}}</h4>
                 </div>
@@ -40,12 +46,17 @@
         </div>
     </div>
 
-
-    <div *ngIf="usuario==='Administrador'">
-        <div class="d-flex">
-            <h2 class="mb-4">Pedidos</h2>
-            <div *ngIf="!pedidos.length" style="margin-left: 30px;" class="spinner-border text-primary" role="status">
-                <span class="sr-only">Loading...</span>
+    <div *ngIf="tipoUsuario==='Administrador'">
+        <div class="mb-3 d-flex justify-content-between">
+            <div>
+                <h2>Pedidos</h2>
+                <div *ngIf="!pedidos.length" style="margin-left: 30px;" class="spinner-border text-primary"
+                    role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+            <div>
+                <input [(ngModel)]="listFilter" placeholder="Buscar producto" type="text">
             </div>
         </div>
         <div class="pedido" *ngFor="let pedido of pedidos">
@@ -60,6 +71,7 @@
                     <h4 class="mb-5">Estado: {{pedido.status}}
                         <span *ngIf="pedido.status === 'Pendiente'" class="mdi mdi-clock-outline"></span>
                         <span *ngIf="pedido.status === 'Entregado'" class="mdi mdi-check"></span>
+                        <span *ngIf="pedido.status === 'Cancelado'" class="mdi mdi-close"></span>
                     </h4>
                     <h4>Total: {{pedido.total | currency}}</h4>
                 </div>
@@ -73,9 +85,13 @@
                             <span class="sr-only">Loading...</span>
                         </div>
                     </div>
-                    <button (click)="confirmar(pedido)" *ngIf="pedido.status === 'Pendiente'"
-                        class="btn btn-success">Confirmar entrega de
-                        pedido</button>
+                    <div>
+                        <button (click)="confirmar(pedido)" *ngIf="pedido.status === 'Pendiente'"
+                            class="btn btn-success mr-4">Confirmar entrega de
+                            pedido</button>
+                        <button (click)="cancelarPedido(pedido)" *ngIf="pedido.status === 'Pendiente'"
+                            class="btn btn-danger">Cancelar pedido</button>
+                    </div>
                 </div>
                 <ul *ngFor="let producto of pedido.productos">
                     <li> {{producto.nombre}}</li>
@@ -84,4 +100,3 @@
         </div>
     </div>
 </div>
-

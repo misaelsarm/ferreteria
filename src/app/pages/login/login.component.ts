@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
 
   usuario: UsuarioModel = new UsuarioModel();
 
-  constructor(private auth: AuthService, private afs: AngularFirestore, private route: Router) {
+  constructor(private auth: AuthService, private firestore: AngularFirestore, private route: Router) {
   }
 
   ngOnInit(): void {
@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
       return;
     }
     this.auth.login(this.usuario).then((cred) => {
-      const user = this.afs.collection('Users').doc(cred.user.uid);
+      const user = this.firestore.collection('Users').doc(cred.user.uid);
       user.get().toPromise().then((doc) => {
         const data = doc.data();
 
